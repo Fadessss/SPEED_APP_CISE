@@ -35,3 +35,5 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+pages/resultsTableDummyData.txt
+pages/searchbackup.txt
