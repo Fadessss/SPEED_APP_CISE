@@ -29,7 +29,7 @@ export default function Home() {
         <button type="submit">Submit</button>
       </form>
       {/* Link to search page */}
-      <Link href="/search-page/Search">
+      <Link href="/Search">
         Go to Search page
       </Link>
     </div>
