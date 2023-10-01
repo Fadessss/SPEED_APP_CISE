@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 export default function Home() {
   const [text, setText] = useState('')
@@ -19,6 +20,9 @@ export default function Home() {
         </label>
         <button type="submit">Submit</button>
       </form>
+      <Link href="/search">
+        <a>Go to Search page</a>
+      </Link>
     </div>
   )
 }
