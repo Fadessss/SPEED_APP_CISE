@@ -51,8 +51,8 @@ function Search() {
         </div>
         <button>Go</button>
       </div>
-      <table>
-        <tr>
+      <table className={styles.table}>
+        <tr className={styles.tableRow}>
           <th>Title</th>
           <th>Authors</th>
           <th>Year</th>
@@ -64,16 +64,16 @@ function Search() {
           <th>Participant</th>
         </tr>
         {results.map((result, index) => (
-          <tr key={index}>
-            <td>{result.title}</td>
-            <td>{result.authors}</td>
-            <td>{result.year}</td>
-            <td>{result.journal}</td>
-            <td>{result.SEpractice}</td>
-            <td>{result.claim}</td>
-            <td>{result.result}</td>
-            <td>{result.research}</td>
-            <td>{result.participant}</td>
+          <tr key={index} className={styles.tableRow}>
+            <td className={styles.tableData}>{result.title}</td>
+            <td className={styles.tableData}>{result.authors}</td>
+            <td className={styles.tableData}>{result.year}</td>
+            <td className={styles.tableData}>{result.journal}</td>
+            <td className={styles.tableData}>{result.SEpractice}</td>
+            <td className={styles.tableData}>{result.claim}</td>
+            <td className={styles.tableData}>{result.result}</td>
+            <td className={styles.tableData}>{result.research}</td>
+            <td className={styles.tableData}>{result.participant}</td>
           </tr>
         ))}
       </table>
