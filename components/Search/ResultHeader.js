@@ -19,8 +19,9 @@ const ResultHeader = ({ sortConfig, setSortConfig }) => {
           <th className={sortConfig.key === "result" ? styles.columnSort + " " + styles[sortConfig.direction] : styles.columnSort} onClick={() => setSortConfig({ key: 'result', direction: sortConfig.direction === 'ascending' ? 'descending' : 'ascending' })}>Result</th>
           <th className={sortConfig.key === "research" ? styles.columnSort + " " + styles[sortConfig.direction] : styles.columnSort} onClick={() => setSortConfig({ key: 'research', direction: sortConfig.direction === 'ascending' ? 'descending' : 'ascending' })}>Research</th>
           <th className={sortConfig.key === "participant" ? styles.columnSort + " " + styles[sortConfig.direction] : styles.columnSort} onClick={() => setSortConfig({ key: 'participant', direction: sortConfig.direction === 'ascending' ? 'descending' : 'ascending' })}>Participant</th>
-          <th>Summary</th> {/* Non-sortable columns */}
-          <th>Rate</th> {/* Non-sortable columns */}
+          {/* Non-sortable columns */}
+          <th>Summary</th> 
+          <th>Rate</th>
         </tr>
   );
 }

@@ -18,13 +18,13 @@ const RatingPopup = ({
     // popup is shown/hidden based on the boolean 'showRatingPopup'
     showRatingPopup ? (
         <div className={styles.popup}>
-          // closeButton to close the popup
+          {/* closeButton to close the popup */}
           <button className={styles.closeButton} onClick={() => setShowRatingPopup(false)}>X</button>
           
-          // header shows the title of the item to be rated
+          {/* header shows the title of the item to be rated */}
           <h2>Rate {selectedResult.title}</h2>
           
-          // drop-down to select a rating between 1 and 5
+          {/* drop-down to select a rating between 1 and 5 */}
           <select value={userRating} onChange={(e) => setUserRating(e.target.value)}>
             {[1, 2, 3, 4, 5].map((rating) => (
               <option key={rating} value={rating}>
@@ -33,11 +33,11 @@ const RatingPopup = ({
             ))}
           </select>
           
-          // button to submit the current selected rating
+          {/* button to submit the current selected rating */}
           <button onClick={submitRating}>Submit Rating</button>
           
-          // displays the current average rating of the item
-          // shown only when averageRating is not null
+          {/* displays the current average rating of the item */}
+          {/* shown only when averageRating is not null */}
           {averageRating !== null && (
             <p>The article&apos;s average rating is {averageRating}</p>
           )}
