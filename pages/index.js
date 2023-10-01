@@ -30,7 +30,7 @@ export default function Home() {
       </form>
       {/* Link to search page */}
       <Link href="/search">
-        <a>Go to Search page</a>
+        Go to Search page
       </Link>
     </div>
   )

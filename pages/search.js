@@ -18,19 +18,39 @@ const results = [
     research: 'Case Study',
     participant: 'Student',
   },
-  // ... add other dummy results ...
+  {
+    title: 'Title 2',
+    authors: 'Author 2',
+    year: '2022',
+    journal: 'Journal 2',
+    SEpractice: 'SE Practice 2',
+    claim: 'Claim 2',
+    result: 'Agree',
+    research: 'Investigation',
+    participant: 'Researcher',
+  }
 ];
 
 function Search() {
-  //Topic
   const [selectedTopic, setTopic] = useState(topics[0]);
-  //Claim
   const [selectedClaim, setClaim] = useState(claims[0]);
-  //show popup
   const [showPopup, setShowPopup] = useState(false);
-  //selected result
   const [selectedResult, setSelectedResult] = useState(null);
 
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    direction: 'ascending',
+  });
+
+  const sortResults = (results) => {
+    let sortedResults = [...results];
+    if (sortConfig.direction === 'ascending') {
+      sortedResults.sort((a, b) => a[sortConfig.key] > b[sortConfig.key] ? 1 : -1);
+    } else {
+      sortedResults.sort((a, b) => a[sortConfig.key] < b[sortConfig.key] ? 1 : -1);
+    }
+    return sortedResults;
+  };
 
   return (
     <div className={styles.container}>
@@ -63,21 +83,24 @@ function Search() {
         {/* go button (initiates search) */}
         <button>Go</button>
       </div>
+
       {/* Table of results */}
       <table className={styles.table}>
         <tr className={styles.tableRow}>
-          <th>Title</th>
-          <th>Authors</th>
-          <th>Year</th>
-          <th>Journal</th>
-          <th>SE Practice</th>
-          <th>Claim</th>
-          <th>Result</th>
-          <th>Research</th>
-          <th>Participant</th>
+          {/* Adding onClick events for sorting */}
+          <th className={sortConfig.key === "title" ? styles.columnSort + " " + styles[sortConfig.direction] : styles.columnSort} onClick={() => setSortConfig({ key: 'title', direction: sortConfig.direction === 'ascending' ? 'descending' : 'ascending' })}>Title</th>
+          <th className={sortConfig.key === "authors" ? styles.columnSort + " " + styles[sortConfig.direction] : styles.columnSort} onClick={() => setSortConfig({ key: 'authors', direction: sortConfig.direction === 'ascending' ? 'descending' : 'ascending' })}>Authors</th>
+          <th className={sortConfig.key === "year" ? styles.columnSort + " " + styles[sortConfig.direction] : styles.columnSort} onClick={() => setSortConfig({ key: 'year', direction: sortConfig.direction === 'ascending' ? 'descending' : 'ascending' })}>Year</th>
+          <th className={sortConfig.key === "journal" ? styles.columnSort + " " + styles[sortConfig.direction] : styles.columnSort} onClick={() => setSortConfig({ key: 'journal', direction: sortConfig.direction === 'ascending' ? 'descending' : 'ascending' })}>Journal</th>
+          <th className={sortConfig.key === "SEpractice" ? styles.columnSort + " " + styles[sortConfig.direction] : styles.columnSort} onClick={() => setSortConfig({ key: 'SEpractice', direction: sortConfig.direction === 'ascending' ? 'descending' : 'ascending' })}>SE Practice</th>
+          <th className={sortConfig.key === "claim" ? styles.columnSort + " " + styles[sortConfig.direction] : styles.columnSort} onClick={() => setSortConfig({ key: 'claim', direction: sortConfig.direction === 'ascending' ? 'descending' : 'ascending' })}>Claim</th>
+          <th className={sortConfig.key === "result" ? styles.columnSort + " " + styles[sortConfig.direction] : styles.columnSort} onClick={() => setSortConfig({ key: 'result', direction: sortConfig.direction === 'ascending' ? 'descending' : 'ascending' })}>Result</th>
+          <th className={sortConfig.key === "research" ? styles.columnSort + " " + styles[sortConfig.direction] : styles.columnSort} onClick={() => setSortConfig({ key: 'research', direction: sortConfig.direction === 'ascending' ? 'descending' : 'ascending' })}>Research</th>
+          <th className={sortConfig.key === "participant" ? styles.columnSort + " " + styles[sortConfig.direction] : styles.columnSort} onClick={() => setSortConfig({ key: 'participant', direction: sortConfig.direction === 'ascending' ? 'descending' : 'ascending' })}>Participant</th>
           <th>Summary</th>
         </tr>
-        {results.map((result, index) => (
+        {/* Using the sortResults function before mapping */}
+        {sortResults(results).map((result, index) => (
           <tr key={index} className={styles.tableRow}>
             {/* table columns */}
             <td className={styles.tableData}>{result.title}</td>
@@ -96,15 +119,17 @@ function Search() {
           </tr>
         ))}
       </table>
+
       {/* Summary popup */}
       {showPopup ? (
         <div className={styles.popup}>
           <button className={styles.closeButton} onClick={() => setShowPopup(false)}>X</button>
           <h2>{selectedResult.title} - {selectedResult.year} - {selectedResult.authors}</h2>
-          <p>This is the summary, about 200 words long. It provides a brief summary of the data related to the claim within the journal article. 
-            For example, {selectedResult.claim} was analyzed and researchers found that {selectedResult.result}. 
-            The article was written by {selectedResult.authors} in {selectedResult.year}, and was published in {selectedResult.journal}. 
-            This information provides valuable insights into {selectedResult.SEpractice}.</p>
+          <p>This is the summary, about 200 words long. It provides a brief summary of the data related to the claim within the journal article.
+          {selectedResult.title} demonstrates evidence which {selectedResult.result}s that {selectedResult.SEpractice} {selectedResult.claim}.
+            <br /><br />
+            The article was written by {selectedResult.authors} in {selectedResult.year}, and was published in {selectedResult.journal}.
+            </p>
         </div>
       ) : null}
 
