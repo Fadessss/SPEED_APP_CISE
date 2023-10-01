@@ -99,9 +99,12 @@ function Search() {
       {/* Summary popup */}
       {showPopup ? (
         <div className={styles.popup}>
-          <button onClick={() => setShowPopup(false)}>X</button>
+          <button className={styles.closeButton} onClick={() => setShowPopup(false)}>X</button>
           <h2>{selectedResult.title} - {selectedResult.year} - {selectedResult.authors}</h2>
-          <p>This is the summary, about 200 words long. It provides a brief summary of the data related to the claim within the journal article. For example, {selectedResult.claim} was analyzed and researchers found that {selectedResult.result}. The article was written by {selectedResult.authors} in {selectedResult.year}, and was published in {selectedResult.journal}. This information provides valuable insights into {selectedResult.SEpractice}.</p>
+          <p>This is the summary, about 200 words long. It provides a brief summary of the data related to the claim within the journal article. 
+            For example, {selectedResult.claim} was analyzed and researchers found that {selectedResult.result}. 
+            The article was written by {selectedResult.authors} in {selectedResult.year}, and was published in {selectedResult.journal}. 
+            This information provides valuable insights into {selectedResult.SEpractice}.</p>
         </div>
       ) : null}
 
