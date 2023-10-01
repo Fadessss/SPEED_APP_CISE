@@ -37,8 +37,8 @@ async function mongooseConnect() {
   return cachedDb;
 }
 
-// Export handler variable containing default async function as API route to handle HTTP requests
-const handler = async (req, res) => {
+// Export default async function as API route to handle HTTP requests
+export default async (req, res) => {
   // Wait until connection to the database has been established
   await connectToDatabase();
 
