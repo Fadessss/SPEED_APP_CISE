@@ -17,7 +17,7 @@ const RatingPopup = ({ selectedResult, setShowRatingPopup, showRatingPopup, user
           </select>
           <button onClick={submitRating}>Submit Rating</button>
           {averageRating !== null && (
-            <p>The article's average rating is {averageRating}</p>
+            <p>The article&apos;s average rating is {averageRating}</p>
           )}
         </div> ) : null
   );
