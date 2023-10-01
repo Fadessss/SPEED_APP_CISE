@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styles from './search.module.css';
 
+// Define your placeholder topics and claims
 const topics = ['Topic 1', 'Topic 2', 'Topic 3', 'Topic 4', 'Topic 5'];
 const claims = ['Claim 1', 'Claim 2', 'Claim 3', 'Claim 4', 'Claim 5'];
 
+// Dummy data
 const results = [
   {
     title: 'Title 1',
@@ -20,27 +22,24 @@ const results = [
 ];
 
 function Search() {
+  //Topic
   const [selectedTopic, setTopic] = useState(topics[0]);
+  //Claim
   const [selectedClaim, setClaim] = useState(claims[0]);
+  //show popup
   const [showPopup, setShowPopup] = useState(false);
+  //selected result
   const [selectedResult, setSelectedResult] = useState(null);
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
 
-  const sortResults = (results) => {
-    let sortedResults = [...results];
-    if (sortConfig.direction === 'ascending') {
-      sortedResults.sort((a, b) => a[sortConfig.key] > b[sortConfig.key] ? 1 : -1);
-    } else {
-      sortedResults.sort((a, b) => a[sortConfig.key] < b[sortConfig.key] ? 1 : -1);
-    }
-    return sortedResults;
-  }; 
 
   return (
     <div className={styles.container}>
+      {/* Header bar */}
       <div className={styles.searchBar}>
+        {/* Logo */}
         <h1>SPEED</h1>
         <div>
+          {/* Topic with dropdown list */}
           <h3>Topic</h3>
           <select value={selectedTopic} onChange={(e) => setTopic(e.target.value)}>
             {topics.map((topic) => (
@@ -51,6 +50,7 @@ function Search() {
           </select>
         </div>
         <div>
+          {/* Claim with dropdown list */}
           <h3>Claim</h3>
           <select value={selectedClaim} onChange={(e) => setClaim(e.target.value)}>
             {claims.map((claim) => (
@@ -60,23 +60,43 @@ function Search() {
             ))}
           </select>
         </div>
+        {/* go button (initiates search) */}
         <button>Go</button>
       </div>
+      {/* Table of results */}
       <table className={styles.table}>
         <tr className={styles.tableRow}>
-          <th 
-             className={styles.columnSort + (sortConfig.key==="title" ? " " + styles[sortConfig.direction] : "")}
-             onClick={() => setSortConfig({ key: 'title', direction: sortConfig.direction == 'ascending' ? 'descending' : 'ascending'})}
-          >Title</th>
-          {/* Similar onClick to be added to all other th elements for their own keys */}
+          <th>Title</th>
+          <th>Authors</th>
+          <th>Year</th>
+          <th>Journal</th>
+          <th>SE Practice</th>
+          <th>Claim</th>
+          <th>Result</th>
+          <th>Research</th>
+          <th>Participant</th>
+          <th>Summary</th>
         </tr>
-        {sortResults(results).map((result, index) => (
+        {results.map((result, index) => (
           <tr key={index} className={styles.tableRow}>
+            {/* table columns */}
             <td className={styles.tableData}>{result.title}</td>
-            {/* Other td elements */}
+            <td className={styles.tableData}>{result.authors}</td>
+            <td className={styles.tableData}>{result.year}</td>
+            <td className={styles.tableData}>{result.journal}</td>
+            <td className={styles.tableData}>{result.SEpractice}</td>
+            <td className={styles.tableData}>{result.claim}</td>
+            <td className={styles.tableData}>{result.result}</td>
+            <td className={styles.tableData}>{result.research}</td>
+            <td className={styles.tableData}>{result.participant}</td>
+            {/* Summary button */}
+            <td className={styles.tableData}>
+              <button onClick={() => { setShowPopup(true); setSelectedResult(result); }}>Summary</button>
+            </td>
           </tr>
         ))}
       </table>
+      {/* Summary popup */}
       {showPopup ? (
         <div className={styles.popup}>
           <button className={styles.closeButton} onClick={() => setShowPopup(false)}>X</button>
