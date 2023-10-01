@@ -22,14 +22,24 @@ const results = [
 ];
 
 function Search() {
+  //Topic
   const [selectedTopic, setTopic] = useState(topics[0]);
+  //Claim
   const [selectedClaim, setClaim] = useState(claims[0]);
+  //show popup
+  const [showPopup, setShowPopup] = useState(false);
+  //selected result
+  const [selectedResult, setSelectedResult] = useState(null);
+
 
   return (
     <div className={styles.container}>
+      {/* Header bar */}
       <div className={styles.searchBar}>
+        {/* Logo */}
         <h1>SPEED</h1>
         <div>
+          {/* Topic with dropdown list */}
           <h3>Topic</h3>
           <select value={selectedTopic} onChange={(e) => setTopic(e.target.value)}>
             {topics.map((topic) => (
@@ -40,6 +50,7 @@ function Search() {
           </select>
         </div>
         <div>
+          {/* Claim with dropdown list */}
           <h3>Claim</h3>
           <select value={selectedClaim} onChange={(e) => setClaim(e.target.value)}>
             {claims.map((claim) => (
@@ -49,8 +60,10 @@ function Search() {
             ))}
           </select>
         </div>
+        {/* go button (initiates search) */}
         <button>Go</button>
       </div>
+      {/* Table of results */}
       <table className={styles.table}>
         <tr className={styles.tableRow}>
           <th>Title</th>
@@ -62,9 +75,11 @@ function Search() {
           <th>Result</th>
           <th>Research</th>
           <th>Participant</th>
+          <th>Summary</th>
         </tr>
         {results.map((result, index) => (
           <tr key={index} className={styles.tableRow}>
+            {/* table columns */}
             <td className={styles.tableData}>{result.title}</td>
             <td className={styles.tableData}>{result.authors}</td>
             <td className={styles.tableData}>{result.year}</td>
@@ -74,9 +89,22 @@ function Search() {
             <td className={styles.tableData}>{result.result}</td>
             <td className={styles.tableData}>{result.research}</td>
             <td className={styles.tableData}>{result.participant}</td>
+            {/* Summary button */}
+            <td className={styles.tableData}>
+              <button onClick={() => { setShowPopup(true); setSelectedResult(result); }}>Summary</button>
+            </td>
           </tr>
         ))}
       </table>
+      {/* Summary popup */}
+      {showPopup ? (
+        <div className={styles.popup}>
+          <button onClick={() => setShowPopup(false)}>X</button>
+          <h2>{selectedResult.title} - {selectedResult.year} - {selectedResult.authors}</h2>
+          <p>This is the summary, about 200 words long. It provides a brief summary of the data related to the claim within the journal article. For example, {selectedResult.claim} was analyzed and researchers found that {selectedResult.result}. The article was written by {selectedResult.authors} in {selectedResult.year}, and was published in {selectedResult.journal}. This information provides valuable insights into {selectedResult.SEpractice}.</p>
+        </div>
+      ) : null}
+
     </div>
   );
 }

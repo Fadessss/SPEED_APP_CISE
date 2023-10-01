@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+//Model of schema used for SPEED database
+
 const SEPracticeSchema = new mongoose.Schema({
   title: {
     type: String,

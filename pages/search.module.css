@@ -28,3 +28,15 @@
   .tableData {
     padding: 10px 0;
   }
+
+  .popup {
+    position: fixed;
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid black;
+    overflow: auto;
+  }
