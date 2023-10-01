@@ -1,5 +1,8 @@
 import mongoose from 'mongoose';
 
+// Placeholder model, used to test database functionality
+
+
 const UserSchema = new mongoose.Schema({
   text: {
     type: String,
