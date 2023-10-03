@@ -2,6 +2,9 @@ import mongoose from 'mongoose';
 
 //Model of schema used for SPEED database
 
+//Must restart page (either local or on vercel) to see changes to enumerated fields
+ //and other changes in here as this is cached.
+
 const SEPracticeSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -50,17 +53,13 @@ const SEPracticeSchema = new mongoose.Schema({
   },
   typeOfResearch: {
     type: String,
-    enum: ['Case Study', 'Experiment'], // enum used to limit to specified values
+    enum: ['Case Study', 'Experiment', 'Survey', 'Interview'], // enum used to limit to specified values
     required: true,
   },
   typeOfParticipant: {
     type: String,
     enum: ['Student', 'Practitioner'], // enum used to limit to specified values
     required: true,
-  },
-  userRating: {
-    type: Number,
-    required: false
   }
 });
 
