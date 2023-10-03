@@ -57,10 +57,6 @@ const SEPracticeSchema = new mongoose.Schema({
     type: String,
     enum: ['Student', 'Practitioner'], // enum used to limit to specified values
     required: true,
-  },
-  userRating: {
-    type: Number,
-    required: false
   }
 });
 

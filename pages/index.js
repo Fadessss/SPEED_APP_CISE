@@ -31,6 +31,10 @@ export default function Home() {
       {/* Link to search page */}
       <Link href="/Search">
         Go to Search page
+        <br />
+      </Link>
+      <Link href="/dbDebug">
+        Go to DB Debug page (TESTING ONLY)
       </Link>
     </div>
   )
