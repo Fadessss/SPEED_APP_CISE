@@ -9,7 +9,7 @@ class InputForm extends Component {
         super(props);
         this.state = {
             title: '',
-            authors: '',
+            authors: [''], // Initially, an empty author input field
             journalOrConferenceName: '',
             yearOfPublication: '',
             volume: '',
@@ -89,9 +89,9 @@ class InputForm extends Component {
             errors.title = 'Title is required';
         }
 
-        if (this.state.authors.trim() === '') {
+        if (this.state.authors.some((author) => author.trim() === '')) {
             errors.authors = 'Authors are required';
-        }
+          }
 
         if (this.state.journalOrConferenceName.trim() === '') {
             errors.journalOrConferenceName = 'Journal/Conference Name is required';
@@ -100,6 +100,24 @@ class InputForm extends Component {
         // Add validation logic for other fields here
 
         return errors;
+    };
+
+    handleAuthorChange = (e, index) => {
+        const authors = [...this.state.authors];
+        authors[index] = e.target.value;
+        this.setState({ authors });
+    };
+
+    addAuthorInput = () => {
+        this.setState((prevState) => ({
+            authors: [...prevState.authors, ''], // Add a new empty author input field
+        }));
+    };
+
+    removeAuthorInput = (index) => {
+        const authors = [...this.state.authors];
+        authors.splice(index, 1); // Remove the author input field at the specified index
+        this.setState({ authors });
     };
 
     render() {
@@ -128,17 +146,35 @@ class InputForm extends Component {
                     <label htmlFor="authors" className={styles.form_group_label}>
                         Authors<span className="required">*</span>:
                     </label>
-                    <input
-                        type="text"
-                        id="authors"
-                        name="authors"
-                        value={this.state.authors}
-                        onChange={this.handleChange}
-                        placeholder="Enter the authors"
-                        required
-                        className={`form_group_input ${styles.form_group_input}`}
-                    />
-                    {errors.authors && <span className={styles.error_message}>{errors.authors}</span>}
+                    {this.state.authors.map((author, index) => (
+                        <div key={index} className="author-input">
+                            <input
+                                type="text"
+                                name="authors"
+                                value={author}
+                                placeholder="Enter the author"
+                                onChange={(e) => this.handleAuthorChange(e, index)}
+                                required
+                                className={`form_group_input ${styles.form_group_input}`}
+                            />
+                            {index > 0 && (
+                                <button
+                                    type="button"
+                                    onClick={() => this.removeAuthorInput(index)}
+                                    className= {styles.remove_author_button}
+                                >
+                                    Remove
+                                </button>
+                            )}
+                        </div>
+                    ))}
+                    <button
+                        type="button"
+                        onClick={this.addAuthorInput}
+                        className={styles.add_author_button}
+                    >
+                        Add Author
+                    </button>
                 </div>
 
                 <div className={styles.form_group}>
