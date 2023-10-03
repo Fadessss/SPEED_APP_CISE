@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function dbDebug() {
+export default function DbDebug() {
   const [resultMessage, setResultMessage] = useState('');
 
   const data = [
