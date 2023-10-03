@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import styles from './inputform.module.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 class InputForm extends Component {
     constructor(props) {
@@ -54,6 +57,10 @@ class InputForm extends Component {
                         submitted: true,
                         isSubmitting: false, // Set isSubmitting to false after successful submission
                     });
+                    toast.success('Article submitted successfully!', {
+                        position: 'top-right',
+                        autoClose: 3000, // Notification will auto-close after 3 seconds
+                    });
                 } else {
                     // Handle API call errors here
                     console.error('API call error:', response.statusText);
@@ -63,6 +70,10 @@ class InputForm extends Component {
                 // Handle submission error, you can show an error message or retry
                 console.error('Submission error:', error);
                 this.setState({ isSubmitting: false }); // Set isSubmitting to false on error
+                toast.error('Error submitting article.', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                });
             }
         } else {
             // Form has errors, update the state to show error messages
@@ -366,14 +377,15 @@ class InputForm extends Component {
                         <option value="Practitioner">Practitioner</option>
                     </select>
                 </div>
-
                 <button
                     type="submit"
-                    className={`${styles.submit_button} ${submitted ? styles.submitted_button : ''}`}
+                    className={styles.submit_button}
                     disabled={isSubmitting || submitted}
+                    onClick={this.handleSubmit}
                 >
                     {isSubmitting ? 'Submitting...' : submitted ? 'Submitted' : 'Submit'}
                 </button>
+
 
             </form>
         );
