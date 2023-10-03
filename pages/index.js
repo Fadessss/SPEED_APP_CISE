@@ -12,7 +12,7 @@ export default function Home() {
   const handleSubmit = async (event) => {
     // Prevent the default form submission behavior 
     event.preventDefault()
-    
+
     // Send a POST request to our API at the '/api/data' endpoint, and pass along our text data.
     const res = await axios.post('/api/data', { text })
   }
@@ -35,7 +35,12 @@ export default function Home() {
       </Link>
       <Link href="/dbDebug">
         Go to DB Debug page (TESTING ONLY)
+        <br />
       </Link>
+      <Link href="/ImportBibtex">
+        Go to Upload page
+      </Link>
+
     </div>
   )
 }
