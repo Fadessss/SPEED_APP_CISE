@@ -13,13 +13,13 @@ const ResultRow = ({ result, setShowPopup, setSelectedResult, setShowRatingPopup
             {/* Display the contents of the properties inside the td elements */}
             <td className={styles.tableData}>{result.title}</td>
             <td className={styles.tableData}>{result.authors}</td>
-            <td className={styles.tableData}>{result.year}</td>
-            <td className={styles.tableData}>{result.journal}</td>
-            <td className={styles.tableData}>{result.SEpractice}</td>
+            <td className={styles.tableData}>{result.yearOfPublication}</td>
+            <td className={styles.tableData}>{result.journalOrConferenceName}</td>
+            <td className={styles.tableData}>{result.SEPractice}</td>
             <td className={styles.tableData}>{result.claim}</td>
-            <td className={styles.tableData}>{result.result}</td>
-            <td className={styles.tableData}>{result.research}</td>
-            <td className={styles.tableData}>{result.participant}</td>
+            <td className={styles.tableData}>{result.resultOfEvidence}</td>
+            <td className={styles.tableData}>{result.typeOfResearch}</td>
+            <td className={styles.tableData}>{result.typeOfParticipant}</td>
             
             {/* Create a button that, when clicked, sets the showPopup state variable to true and the selectedResult state variable to the current result */}
             <td className={styles.tableData}>

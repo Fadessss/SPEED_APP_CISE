@@ -2,7 +2,7 @@ import React from 'react';   // Import the necessary React libraries.
 import styles from './search.module.css';   // Import styling from a CSS module.
 
 // Declare a functional component called Header and destructuring relevant props from the parent component.
-const Header = ({ selectedTopic, setTopic, selectedClaim, setClaim, topics, claims }) => {
+const Header = ({ selectedTopic, setTopic, selectedClaim, setClaim, topics, claims, onGo, onAll }) => {
   return (
     // Use a div to wrap all elements and apply some styles from the imported CSS module.
     <div className={styles.searchBar}>  
@@ -43,7 +43,9 @@ const Header = ({ selectedTopic, setTopic, selectedClaim, setClaim, topics, clai
         </select>
       </div>
       {/* Render a Go button for initiating searches. */}
-      <button>Go</button>
+      <button onClick={onGo}>Go</button> 
+      {/* New All button */}
+      <button onClick={onAll}>All</button> 
     </div>
   );
 }
