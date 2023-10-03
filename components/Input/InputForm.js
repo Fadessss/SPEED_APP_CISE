@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class InputForm extends Component {
     constructor(props) {
         super(props);
@@ -64,7 +65,7 @@ class InputForm extends Component {
         const { errors } = this.state;
 
         return (
-            <form onSubmit={this.handleSubmit} className="user-friendly-form">
+            <form onSubmit={this.handleSubmit} className="input-form">
                 <div className="form-group">
                     <label htmlFor="title">
                         Title<span className="required">*</span>:
@@ -97,26 +98,42 @@ class InputForm extends Component {
                     {errors.authors && <span className="error-message">{errors.authors}</span>}
                 </div>
 
-                {/* Group related fields */}
-                <div className="group">
-                    <div className="form-group">
-                        <label htmlFor="journalOrConferenceName">
-                            Journal/Conference Name<span className="required">*</span>:
-                        </label>
-                        <input
-                            type="text"
-                            id="journalOrConferenceName"
-                            name="journalOrConferenceName"
-                            value={this.state.journalOrConferenceName}
-                            onChange={this.handleChange}
-                            placeholder="Enter the journal/conference name"
-                            required
-                        />
-                        {errors.journalOrConferenceName && (
-                            <span className="error-message">{errors.journalOrConferenceName}</span>
-                        )}
-                    </div>
+                <div className="form-group">
+                    <label htmlFor="journalOrConferenceName">
+                        Journal/Conference Name<span className="required">*</span>:
+                    </label>
+                    <select
+                        id="journalOrConferenceName"
+                        name="journalOrConferenceName"
+                        value={this.state.journalOrConferenceName}
+                        onChange={this.handleChange}
+                        required
+                        className="form-input"
+                    >
+                        <option value="">Select a Journal/Conference Name</option>
+                        {[
+                            "Journal of Quality Assurance in Software Engineering",
+                            "Software Engineering Review",
+                            "Software Quality Journal",
+                            "The IEEE Software Journal",
+                            "International Software Engineering Journal",
+                            "Global Software Development Journal",
+                            "Software Engineering Education Journal",
+                            "Journal of Software Production",
+                            "Software Engineering Case Studies",
+                            "Journal of Software and Systems Development",
+                            "Complex Systems and Software Engineering Journal",
+                        ].sort().map((journal, index) => (
+                            <option key={index} value={journal}>
+                                {journal}
+                            </option>
+                        ))}
+                    </select>
+                    {errors.journalOrConferenceName && (
+                        <span className="error-message">{errors.journalOrConferenceName}</span>
+                    )}
                 </div>
+
 
                 <div className="form-group">
                     <label htmlFor="yearOfPublication">
@@ -203,19 +220,27 @@ class InputForm extends Component {
                             value={this.state.SEPractice}
                             onChange={this.handleChange}
                             required
+                            className="form-input"
                         >
                             <option value="">Select an SE Practice</option>
-                            <option value="Communication and Collaboration">Communication and Collaboration</option>
-                            <option value="Agile Practices">Agile Practices</option>
-                            <option value="Test-driven Development">Test-driven Development</option>
-                            <option value="Pair Programming">Pair Programming</option>
-                            <option value="Continuous Integration">Continuous Integration</option>
-                            {/* Add more SE Practice options here */}
+                            {[
+                                "Communication and Collaboration",
+                                "Agile Practices",
+                                "Test-driven Development",
+                                "Pair Programming",
+                                "Continuous Integration",
+                                // Add more SE Practice options here
+                            ].sort().map((practice, index) => (
+                                <option key={index} value={practice}>
+                                    {practice}
+                                </option>
+                            ))}
                         </select>
                         {errors.SEPractice && (
                             <span className="error-message">{errors.SEPractice}</span>
                         )}
                     </div>
+
 
                     <div className="form-group">
                         <label htmlFor="claim">
@@ -227,20 +252,27 @@ class InputForm extends Component {
                             value={this.state.claim}
                             onChange={this.handleChange}
                             required
+                            className="form-input"
                         >
                             <option value="">Select a Claim</option>
-                            <option value="Reduces manual testing efforts">Reduces manual testing efforts</option>
-                            <option value="Speeds up development time">Speeds up development time</option>
-                            <option value="Have no impact on software quality">Have no impact on software quality</option>
-                            <option value="Increase project success rate">Increase project success rate</option>
-                            <option value="Improves automated testing">Improves automated testing</option>
-                            <option value="Improves code quality">Improves code quality</option>
-                            <option value="Improves workload distribution in global software development">Improves workload distribution in global software development</option>
-                            <option value="Can hinder individual student performance">Can hinder individual student performance</option>
-                            <option value="Enhances junior developer experience in software engineering">Enhances junior developer experience in software engineering</option>
-                            <option value="Reduces the frequency of bugs">Reduces the frequency of bugs</option>
-                            <option value="Reduces software complexity">Reduces software complexity</option>
-                            {/* Add more Claim options here */}
+                            {[
+                                "Reduces manual testing efforts",
+                                "Speeds up development time",
+                                "Have no impact on software quality",
+                                "Increase project success rate",
+                                "Improves automated testing",
+                                "Improves code quality",
+                                "Improves workload distribution in global software development",
+                                "Can hinder individual student performance",
+                                "Enhances junior developer experience in software engineering",
+                                "Reduces the frequency of bugs",
+                                "Reduces software complexity",
+                                // Add more Claim options here
+                            ].sort().map((claim, index) => (
+                                <option key={index} value={claim}>
+                                    {claim}
+                                </option>
+                            ))}
                         </select>
                         {errors.claim && (
                             <span className="error-message">{errors.claim}</span>
