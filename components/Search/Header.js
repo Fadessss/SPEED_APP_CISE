@@ -15,7 +15,7 @@ const Header = ({ selectedTopic, setTopic, selectedClaim, setClaim, topics, clai
         <h3>Topic</h3> 
         {/* This select element renders a drop-down list of topics. 
         It uses the selectedTopic state as its current value and calls the setTopic function when a new option is selected. */}
-        <select value={selectedTopic} onChange={(e) => setTopic(e.target.value)}>  
+       <select aria-label="Topic" value={selectedTopic} onChange={(e) => setTopic(e.target.value)}>    
           {/* // Map each topic in the topics array to an option in the select drop-down. */}
           {topics.map((topic) => (
             // Use the topic value itself as the key and display text.
@@ -32,7 +32,7 @@ const Header = ({ selectedTopic, setTopic, selectedClaim, setClaim, topics, clai
         <h3>Claim</h3>  
         {/* This select element renders a drop-down list of claims. 
         It uses the selectedClaim state as its current value and calls the setClaim function when a new option is selected. */}
-        <select value={selectedClaim} onChange={(e) => setClaim(e.target.value)}>  
+        <select aria-label="Claim" value={selectedClaim} onChange={(e) => setClaim(e.target.value)}>    
           {/*Map each claim in the claims array to an option in the select drop-down. */}
           {claims.map((claim) => (
             // Use the claim value itself as the key and display text.

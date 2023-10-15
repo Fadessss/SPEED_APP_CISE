@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SummaryPopup should not render the popup when showPopup is false 1`] = `<DocumentFragment />`;
+
+exports[`SummaryPopup should render the popup when showPopup is true 1`] = `
+<DocumentFragment>
+  <div
+    class="popup"
+  >
+    <button
+      class="closeButton"
+    >
+      X
+    </button>
+    <h2>
+      TestTitle - 2022 - TestAuthor
+    </h2>
+    <p>
+      This is the summary. It provides a brief summary of the data related to the claim within the journal article.
+      <br />
+      <br />
+      Eg. TestTitle demonstrates evidence which TestEvidences that TestSEPractice TestClaim.
+      <br />
+      <br />
+      The article was written by TestAuthor in 2022, and was published in TestConName.
+    </p>
+  </div>
+</DocumentFragment>
+`;
