@@ -3,12 +3,16 @@ import styles from './feedback.module.css';
 
 const FeedbackForm = ({ displayMessage }) => {
     let feedbackClass;
-    let parsedMessage; // Assuming the JSON data is in the first object
+    let parsedMessage;
 
     if (displayMessage === 'err') {
         parsedMessage = 'err';
     } else if (displayMessage) {
-        parsedMessage = displayMessage[0];
+        if (Array.isArray(displayMessage)) {
+            parsedMessage = displayMessage[0];
+        } else {
+            parsedMessage = displayMessage;
+        }
     } else {
         parsedMessage = null;
     }

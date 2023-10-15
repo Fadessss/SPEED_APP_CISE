@@ -24,7 +24,7 @@ const UploadForm = ({ onFileChange }) => {
                         <AiFillFileImage size={30} />
                     </div>
                     <div className={styles.uploadText}>
-                        <label className={styles.uploadLabel}>Upload a file</label>
+                        <label htmlFor="file-upload" className={styles.uploadLabel}>Upload a file</label>
                         <input id="file-upload" type="file" onChange={handleFileUpload} />
                     </div>
                 </div>
