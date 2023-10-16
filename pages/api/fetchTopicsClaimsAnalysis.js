@@ -31,8 +31,8 @@ export default async (req, res) => {
 
     try {
         const practices = await Analysis.find({}, 'SEPractice claim');
-        const topicsSet = new Set(practices.map((practice) => practice.Analysis));
-        const claimsSet = new Set(practices.map((practice) => practice.claim));
+        const topicsSet = new Set(practices.map(practice => practice.SEPractice));
+        const claimsSet = new Set(practices.map(practice => practice.claim));
         res.json({ topics: [...topicsSet], claims: [...claimsSet] });
     } catch (err) {
         res.status(400).json({ error: err });
