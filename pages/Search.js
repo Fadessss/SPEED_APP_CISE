@@ -109,9 +109,16 @@ function Search() {
         if (analystPassword === '1234') {
             setIsAnalystLoggedIn(true);
             setShowAnalystLogin(false);
+            setAnalystPassword('');
+            console.log('Analyst logged in');
         } else {
             alert('Incorrect password. Please try again.');
         }
+    };
+
+    const handleAnalystLogout = () => {
+        setIsAnalystLoggedIn(false);
+        console.log('Analyst logged out');
     };
 
     // Function to handle sending result to analysis queue
@@ -135,7 +142,14 @@ function Search() {
                 onAll={fetchAllResults} // Pass down fetchAllResults function
             />
             {/* Analyst login popup */}
-            <AnalystLogin />
+            <AnalystLogin
+                setShowAnalystLogin={setShowAnalystLogin}
+                analystPassword={analystPassword}
+                setAnalystPassword={setAnalystPassword}
+                isAnalystLoggedIn={isAnalystLoggedIn}
+                handleAnalystLogin={handleAnalystLogin}
+                handleAnalystLogout={handleAnalystLogout}
+            />
 
             {/* Results table */}
             <table className={styles.table}>

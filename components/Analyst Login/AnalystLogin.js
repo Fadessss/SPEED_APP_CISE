@@ -1,20 +1,26 @@
 import React from 'react';
 import styles from '../Analyst Login/analyst.module.css';
 
-const AnalystLogin = ({ setShowAnalystLogin, analystPassword, setAnalystPassword, setIsAnalystLoggedIn }) => {
+const AnalystLogin = ({ handleAnalystLogout, analystPassword, setAnalystPassword, isAnalystLoggedIn, handleAnalystLogin }) => {
     return (
         <div className={styles.analystLoginContainer}>
-            <h1 className={styles.analystLoginTitle}>Analyst Login</h1>
-            <input type="password" value={analystPassword} onChange={(e) => setAnalystPassword(e.target.value)} className={styles.analystLoginInput} />
-            <button
-                onClick={() => {
-                    setShowAnalystLogin(false);
-                    setIsAnalystLoggedIn(true);
-                }}
-                className={styles.analystLoginButton}
-            >
-                Login
-            </button>
+            {/* Conditionally render text and button label based on analyst login state */}
+            {isAnalystLoggedIn ? (
+                <>
+                    <h1 className={styles.analystLogoutTitle}>Analyst Logged In</h1>
+                    <button onClick={handleAnalystLogout} className={styles.analystLoginButton}>
+                        Logout
+                    </button>
+                </>
+            ) : (
+                <>
+                    <h1 className={styles.analystLoginTitle}>Analyst Login</h1>
+                    <input type="password" value={analystPassword} onChange={(e) => setAnalystPassword(e.target.value)} className={styles.analystLoginInput} />
+                    <button onClick={handleAnalystLogin} className={styles.analystLoginButton}>
+                        Login
+                    </button>
+                </>
+            )}
         </div>
     );
 };
