@@ -50,7 +50,7 @@ const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, onMo
                         <button onClick={() => analysisOnClickFunction(result)}>Send to Analysis</button>
                     </td>
                     <td>
-                        <button onClick={() => onDeleteArticleClick(result)}>Delete Article</button>
+                        <button onClick={() => deleteArticleOnClickFunction(result)}>Delete Article</button>
                     </td>
                 </>
             )}
