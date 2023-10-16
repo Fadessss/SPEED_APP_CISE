@@ -6,7 +6,6 @@ import ResultRow from '../components/Search/ResultRow.js';
 import SummaryPopup from '../components/Search/SummaryPopup.js';
 import RatingPopup from '../components/Search/RatingPopup.js';
 import axios from 'axios';
-import AnalystLogin from '../components/Analyst Login/AnalystLogin';
 
 async function fetchResults() {
     try {
@@ -42,9 +41,6 @@ function Search() {
         direction: 'ascending',
     });
     const [searchResults, setSearchResults] = useState([]);
-    const [showAnalystLogin, setShowAnalystLogin] = useState(false);
-    const [analystPassword, setAnalystPassword] = useState('');
-    const [isAnalystLoggedIn, setIsAnalystLoggedIn] = useState(false);
     const [resultMessage, setResultMessage] = useState('');
 
     // Fetch topics and claims on component mount
@@ -104,66 +100,6 @@ function Search() {
         setAverageRating(4);
     };
 
-    // Function to handle analyst login
-    const handleAnalystLogin = () => {
-        // Check if the entered password is correct
-        if (analystPassword === '1234') {
-            setIsAnalystLoggedIn(true);
-            setShowAnalystLogin(false);
-            setAnalystPassword('');
-            console.log('Analyst logged in');
-        } else {
-            alert('Incorrect password. Please try again.');
-        }
-    };
-
-    const handleAnalystLogout = () => {
-        setIsAnalystLoggedIn(false);
-        console.log('Analyst logged out');
-    };
-
-    // Function to handle sending result to analysis queue
-    const sendToAnalysisQueue = (result) => {
-        let dataFromOriginalDB = result;
-        let dataForAnalysisDB;
-
-        dataForAnalysisDB = {
-            title: dataFromOriginalDB.title,
-            authors: dataFromOriginalDB.authors,
-            journalOrConferenceName: dataFromOriginalDB.journalOrConferenceName,
-            yearOfPublication: dataFromOriginalDB.yearOfPublication,
-            volume: dataFromOriginalDB.volume,
-            number: dataFromOriginalDB.number,
-            pages: dataFromOriginalDB.pages,
-            DOI: dataFromOriginalDB.DOI,
-            SEPractice: dataFromOriginalDB.SEPractice,
-            claim: dataFromOriginalDB.claim,
-            resultOfEvidence: dataFromOriginalDB.resultOfEvidence,
-            typeOfResearch: dataFromOriginalDB.typeOfResearch,
-            typeOfParticipant: dataFromOriginalDB.typeOfParticipant,
-            analysisStatus: 'Awaiting',
-        };
-
-        console.log('Sending result to analysis queue:', dataForAnalysisDB);
-
-        const insertData = async () => {
-            try {
-                const res = await axios.post('/api/insertToAnalysisDB', dataForAnalysisDB);
-
-                if (res.status === 200) {
-                    setResultMessage('Data Inserted Successfully');
-                } else {
-                    setResultMessage('Data Insertion Failed');
-                }
-            } catch (err) {
-                console.error('An error occurred while inserting data', err);
-                setResultMessage('An error occurred while inserting data');
-            }
-        };
-
-        insertData();
-    };
-
     //Display page
     return (
         <div className={styles.container}>
@@ -177,24 +113,13 @@ function Search() {
                 claims={claims}
                 onGo={fetchResults}
                 onAll={fetchAllResults} // Pass down fetchAllResults function
-                isAnalystLoggedIn={isAnalystLoggedIn}
-                sendToAnalysisQueue={sendToAnalysisQueue}
-            />
-            {/* Analyst login popup */}
-            <AnalystLogin
-                setShowAnalystLogin={setShowAnalystLogin}
-                analystPassword={analystPassword}
-                setAnalystPassword={setAnalystPassword}
-                isAnalystLoggedIn={isAnalystLoggedIn}
-                handleAnalystLogin={handleAnalystLogin}
-                handleAnalystLogout={handleAnalystLogout}
             />
 
             {/* Results table */}
             <table className={styles.table}>
                 <tbody>
                     {/* Column headers */}
-                    <ResultHeader sortConfig={sortConfig} setSortConfig={setSortConfig} isAnalystLoggedIn={isAnalystLoggedIn} />
+                    <ResultHeader sortConfig={sortConfig} setSortConfig={setSortConfig} />
                     {/* Rows (sortable by column header) */}
                     {sortResults().map((result, index) => (
                         <ResultRow
@@ -203,8 +128,6 @@ function Search() {
                             setShowPopup={setShowPopup}
                             setSelectedResult={setSelectedResult}
                             setShowRatingPopup={setShowRatingPopup}
-                            isAnalystLoggedIn={isAnalystLoggedIn}
-                            analysisOnClickFunction={sendToAnalysisQueue}
                         />
                     ))}
                 </tbody>
