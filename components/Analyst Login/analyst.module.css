@@ -1,0 +1,29 @@
+/* analyst-login.module.css */
+
+.analystLoginContainer {
+    align-items: center;
+    margin-top: 20px;
+}
+
+.analystLoginTitle {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.analystLoginInput {
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+.analystLoginButton {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.analystLoginButton:hover {
+    background-color: darkblue;
+}
