@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 
-//Model of schema used for analysis database
+//Model of schema used for SPEED database
 
 //Must restart page (either local or on vercel) to see changes to enumerated fields
 //and other changes in here as this is cached.
 
-const SEPracticeSchema = new mongoose.Schema({
+const AnalysisSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -61,6 +61,11 @@ const SEPracticeSchema = new mongoose.Schema({
         enum: ['Student', 'Practitioner'], // enum used to limit to specified values
         required: true,
     },
+    analysisStatus: {
+        type: String,
+        enum: ['Awaiting', 'Completed'],
+        required: true,
+    },
 });
 
-export default mongoose.models.SEPractice || mongoose.model('SEPractice', SEPracticeSchema);
+export default mongoose.models.Analysis || mongoose.model('Analysis', AnalysisSchema);

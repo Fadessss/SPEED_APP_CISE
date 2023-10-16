@@ -46,7 +46,7 @@ const ResultRow = ({ isAnalystLoggedIn, result, setShowPopup, setSelectedResult,
             </td>
             {isAnalystLoggedIn && (
                 <td>
-                    <button onClick={sendToAnalysisQueue}>Send to Analysis</button>
+                    <button onClick={() => sendToAnalysisQueue(result)}>Send to Analysis</button>
                 </td>
             )}
         </tr>
