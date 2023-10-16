@@ -8,63 +8,63 @@ import mongoose from 'mongoose';
 const AnalysisSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true,
+        required: false,
     },
     authors: {
         type: [String],
-        required: true,
+        required: false,
     },
     journalOrConferenceName: {
         type: String,
-        required: true,
+        required: false,
     },
     yearOfPublication: {
         type: Number,
-        required: true,
+        required: false,
     },
     volume: {
         type: Number,
-        required: true,
+        required: false,
     },
     number: {
         type: Number,
-        required: true,
+        required: false,
     },
     pages: {
         type: String,
-        required: true,
+        required: false,
     },
     DOI: {
         type: String,
-        required: true,
+        required: false,
     },
     SEPractice: {
         type: String,
-        required: true,
+        required: false,
     },
     claim: {
         type: String,
-        required: true,
+        required: false,
     },
     resultOfEvidence: {
         type: String,
         enum: ['Agree', 'Disagree'], // enum used to limit to specified values
-        required: true,
+        required: false,
     },
     typeOfResearch: {
         type: String,
         enum: ['Case Study', 'Experiment', 'Survey', 'Interview'], // enum used to limit to specified values
-        required: true,
+        required: false,
     },
     typeOfParticipant: {
         type: String,
         enum: ['Student', 'Practitioner'], // enum used to limit to specified values
-        required: true,
+        required: false,
     },
     analysisStatus: {
         type: String,
         enum: ['Awaiting', 'Completed'],
-        required: true,
+        required: false,
     },
 });
 

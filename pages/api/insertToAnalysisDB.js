@@ -27,6 +27,7 @@ async function mongooseConnect() {
 }
 
 export default async (req, res) => {
+    console.log('Received request:', req.body);
     await connectToDatabase();
 
     try {
