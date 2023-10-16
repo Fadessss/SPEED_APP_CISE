@@ -1,10 +1,11 @@
 import React from 'react';
 // Import the styles for the search module
 import styles from './search.module.css';
+import AnalysisButton from '../Analyst Login/AnalysisButton';
 
 // Declaration of ResultRow functional component
 // It takes result, setShowPopup, setSelectedResult, setShowRatingPopup as props
-const ResultRow = ({ isAnalystLoggedIn, result, setShowPopup, setSelectedResult, setShowRatingPopup, sendToAnalysisQueue }) => {
+const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, setShowPopup, setSelectedResult, setShowRatingPopup, sendToAnalysisQueue }) => {
     // The component returns a table row (tr) element
     return (
         // Add a CSS class to the tr element
@@ -44,9 +45,14 @@ const ResultRow = ({ isAnalystLoggedIn, result, setShowPopup, setSelectedResult,
                     Rate
                 </button>
             </td>
-            {isAnalystLoggedIn && (
+            {isAnalystLoggedIn && !onAnalysisPage && (
                 <td>
                     <button onClick={() => sendToAnalysisQueue(result)}>Send to Analysis</button>
+                </td>
+            )}
+            {isAnalystLoggedIn && onAnalysisPage && (
+                <td>
+                    <AnalysisButton onClick={() => sendToAnalysisQueue(result, buttonText)} text={buttonText} />
                 </td>
             )}
         </tr>
