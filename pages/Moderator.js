@@ -7,6 +7,9 @@ import SummaryPopup from '../components/Search/SummaryPopup.js';
 import RatingPopup from '../components/Search/RatingPopup.js';
 import ModeratorLogin from '../components/ModeratorLogin/ModeratorLogin.js'; // Import ModeratorLogin component
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 async function fetchResults() {
     try {
@@ -45,10 +48,9 @@ function Moderator() {
     const [showModeratorLogin, setShowModeratorLogin] = useState(false);
     const [moderatorPassword, setModeratorPassword] = useState('');
     const [isModeratorLoggedIn, setIsModeratorLoggedIn] = useState(false);
-    const [resultMessage, setResultMessage] = useState('');
 
 
-    
+
     // Fetch topics and claims on component mount
     useEffect(() => {
         const fetchTopicsClaims = async () => {
@@ -147,22 +149,34 @@ function Moderator() {
             analysisStatus: 'Awaiting',
         };
 
-        console.log('Sending result to the analysis queue:', dataForAnalysisDB);
+        console.log('Sending article to the analysis queue:', dataForAnalysisDB);
 
         const insertData = async () => {
             try {
                 const res = await axios.post('/api/insertToAnalysisDB', dataForAnalysisDB);
 
                 if (res.status === 200) {
-                    setResultMessage('Data Inserted Successfully');
+                    console.log('Successfully sent article!');
+
+                    // Update the button text to 'Sent'
+                    result.analysisStatus = 'Sent';
+
+                    // Trigger a re-render by updating the searchResults state
+                    setSearchResults([...searchResults]);
+
+                    toast.success('Article submitted successfully!', {
+                        position: 'top-right',
+                        autoClose: 3000, // Notification will auto-close after 3 seconds
+                    });
                 } else {
-                    setResultMessage('Data Insertion Failed');
+                    console.log('Error sending article!');
                 }
             } catch (err) {
                 console.error('An error occurred while inserting data', err);
-                setResultMessage('An error occurred while inserting data');
             }
         };
+
+
 
         insertData();
     };
@@ -170,6 +184,8 @@ function Moderator() {
     // Display page
     return (
         <div className={styles.container}>
+            <ToastContainer autoClose={3000} />
+
             {/* Conditionally render the login component */}
             {!isModeratorLoggedIn ? (
                 <ModeratorLogin
@@ -207,7 +223,7 @@ function Moderator() {
                                     setShowPopup={setShowPopup}
                                     setSelectedResult={setSelectedResult}
                                     setShowRatingPopup={setShowRatingPopup}
-                                    isModeratorLoggedIn = {setIsModeratorLoggedIn}
+                                    isModeratorLoggedIn={setIsModeratorLoggedIn}
                                     analysisOnClickFunction={sendToAnalysisQueue}
                                 />
                             ))}
