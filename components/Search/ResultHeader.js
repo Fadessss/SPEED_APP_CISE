@@ -67,7 +67,8 @@ const ResultHeader = ({ isAnalystLoggedIn, sortConfig, setSortConfig }) => {
             {/* Non-sortable columns */}
             <th>Summary</th>
             <th>Rate</th>
-            {/* sending to analysis */}
+            <th>Send to Analysis</th>
+            <th>Delete Article</th>
 
             {isAnalystLoggedIn && <th>Analysis</th>}
         </tr>
