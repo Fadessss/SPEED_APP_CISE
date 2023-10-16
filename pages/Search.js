@@ -140,6 +140,8 @@ function Search() {
                 claims={claims}
                 onGo={fetchResults}
                 onAll={fetchAllResults} // Pass down fetchAllResults function
+                isAnalystLoggedIn={isAnalystLoggedIn}
+                sendToAnalysisQueue={sendToAnalysisQueue}
             />
             {/* Analyst login popup */}
             <AnalystLogin
@@ -155,7 +157,7 @@ function Search() {
             <table className={styles.table}>
                 <tbody>
                     {/* Column headers */}
-                    <ResultHeader sortConfig={sortConfig} setSortConfig={setSortConfig} />
+                    <ResultHeader sortConfig={sortConfig} setSortConfig={setSortConfig} isAnalystLoggedIn={isAnalystLoggedIn} />
                     {/* Rows (sortable by column header) */}
                     {sortResults().map((result, index) => (
                         <ResultRow
