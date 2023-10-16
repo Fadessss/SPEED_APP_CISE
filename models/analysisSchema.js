@@ -1,66 +1,71 @@
 import mongoose from 'mongoose';
 
-//Model of schema used for analysis database
+//Model of schema used for SPEED database
 
 //Must restart page (either local or on vercel) to see changes to enumerated fields
 //and other changes in here as this is cached.
 
-const SEPracticeSchema = new mongoose.Schema({
+const AnalysisSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true,
+        required: false,
     },
     authors: {
         type: [String],
-        required: true,
+        required: false,
     },
     journalOrConferenceName: {
         type: String,
-        required: true,
+        required: false,
     },
     yearOfPublication: {
         type: Number,
-        required: true,
+        required: false,
     },
     volume: {
         type: Number,
-        required: true,
+        required: false,
     },
     number: {
         type: Number,
-        required: true,
+        required: false,
     },
     pages: {
         type: String,
-        required: true,
+        required: false,
     },
     DOI: {
         type: String,
-        required: true,
+        required: false,
     },
     SEPractice: {
         type: String,
-        required: true,
+        required: false,
     },
     claim: {
         type: String,
-        required: true,
+        required: false,
     },
     resultOfEvidence: {
         type: String,
         enum: ['Agree', 'Disagree'], // enum used to limit to specified values
-        required: true,
+        required: false,
     },
     typeOfResearch: {
         type: String,
         enum: ['Case Study', 'Experiment', 'Survey', 'Interview'], // enum used to limit to specified values
-        required: true,
+        required: false,
     },
     typeOfParticipant: {
         type: String,
         enum: ['Student', 'Practitioner'], // enum used to limit to specified values
-        required: true,
+        required: false,
+    },
+    analysisStatus: {
+        type: String,
+        enum: ['Awaiting', 'Completed'],
+        required: false,
     },
 });
 
-export default mongoose.models.SEPractice || mongoose.model('SEPractice', SEPracticeSchema);
+export default mongoose.models.Analysis || mongoose.model('Analysis', AnalysisSchema);
