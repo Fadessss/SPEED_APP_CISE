@@ -31,7 +31,7 @@ export default async (req, res) => {
     await connectToDatabase();
 
     try {
-        const result = await analysisSchema.create(req.body.data);
+        const result = await analysisSchema.create(req.body);
         res.json(result);
     } catch (err) {
         res.status(400).json({ error: err });

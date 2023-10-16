@@ -148,7 +148,7 @@ function Search() {
 
         const insertData = async () => {
             try {
-                const res = await axios.post('/api/insertToAnalysisDB', { dataForAnalysisDB });
+                const res = await axios.post('/api/insertToAnalysisDB', dataForAnalysisDB);
 
                 if (res.status === 200) {
                     setResultMessage('Data Inserted Successfully');
