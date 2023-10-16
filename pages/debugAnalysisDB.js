@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function debugAnalysisDB() {
+export default function DebugAnalysisDB() {
     const [resultMessage, setResultMessage] = useState('');
 
     const dropCollection = async () => {
