@@ -214,7 +214,8 @@ function Moderator() {
                     <table className={styles.table}>
                         <tbody>
                             {/* Column headers */}
-                            <ResultHeader sortConfig={sortConfig} setSortConfig={setSortConfig} />
+                            <ResultHeader sortConfig={sortConfig} setSortConfig={setSortConfig} isModeratorLoggedIn={isModeratorLoggedIn} />
+
                             {/* Rows (sortable by column header) */}
                             {sortResults().map((result, index) => (
                                 <ResultRow
@@ -223,7 +224,7 @@ function Moderator() {
                                     setShowPopup={setShowPopup}
                                     setSelectedResult={setSelectedResult}
                                     setShowRatingPopup={setShowRatingPopup}
-                                    isModeratorLoggedIn={setIsModeratorLoggedIn}
+                                    isModeratorLoggedIn={isModeratorLoggedIn}
                                     analysisOnClickFunction={sendToAnalysisQueue}
                                 />
                             ))}

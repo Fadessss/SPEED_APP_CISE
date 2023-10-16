@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './search.module.css';
 
 // Component ResultHeader for displaying header of a table in search results
-const ResultHeader = ({ isAnalystLoggedIn, sortConfig, setSortConfig }) => {
+const ResultHeader = ({ isAnalystLoggedIn, sortConfig, setSortConfig, isModeratorLoggedIn}) => {
     // Render the component
     // className determines the styling of the column based on the current sorting configuration
     // onClick event sets the new sorting configuration based on the current one
@@ -67,9 +67,8 @@ const ResultHeader = ({ isAnalystLoggedIn, sortConfig, setSortConfig }) => {
             {/* Non-sortable columns */}
             <th>Summary</th>
             <th>Rate</th>
-            <th>Send to Analysis</th>
-            <th>Delete Article</th>
-
+            {isModeratorLoggedIn &&  <th>Send to Analysis</th>}
+            {isModeratorLoggedIn &&  <th>Delete Article</th>}
             {isAnalystLoggedIn && <th>Analysis</th>}
         </tr>
     );
