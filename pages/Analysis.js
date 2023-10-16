@@ -123,12 +123,25 @@ function Analysis() {
         console.log('Analyst logged out');
     };
 
-    const setAnalysed = (result, buttonText) => {
-        result.analysisStatus = true;
+    // function to cycle the analysis status of a result between 'Awaiting' 'In Progress' and 'Completed'
+    const cycleAnalysisStatus = (result) => {
+        console.log(result.analysisStatus);
 
-        console.log('Analysed');
-        console.log(result);
+        if (result.analysisStatus === 'Awaiting') {
+            result.analysisStatus = 'In Progress';
+        } else if (result.analysisStatus === 'In Progress') {
+            result.analysisStatus = 'Completed';
+        } else {
+            result.analysisStatus = 'Awaiting';
+        }
+
+        console.log(result.analysisStatus);
     };
+
+    const getAnalysisStatus = (result) => {
+        return result.analysisStatus;
+    };
+
     //Display page
     return (
         <div className={styles.container}>
@@ -170,9 +183,9 @@ function Analysis() {
                                     setSelectedResult={setSelectedResult}
                                     setShowRatingPopup={setShowRatingPopup}
                                     isAnalystLoggedIn={isAnalystLoggedIn}
-                                    sendToAnalysisQueue={setAnalysed}
+                                    analysisOnClickFunction={cycleAnalysisStatus}
+                                    getAnalysisStatus={getAnalysisStatus}
                                     onAnalysisPage={true}
-                                    buttonText={'Click to Analyse'}
                                 />
                             ))}
                         </tbody>

@@ -204,7 +204,7 @@ function Search() {
                             setSelectedResult={setSelectedResult}
                             setShowRatingPopup={setShowRatingPopup}
                             isAnalystLoggedIn={isAnalystLoggedIn}
-                            sendToAnalysisQueue={sendToAnalysisQueue}
+                            analysisOnClickFunction={sendToAnalysisQueue}
                         />
                     ))}
                 </tbody>
