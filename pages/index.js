@@ -49,6 +49,10 @@ export default function Home() {
                 Go to Analysis page
                 <br />
             </Link>
+            <Link href="/Moderator">
+                Go to Moderator page
+                <br />
+            </Link>
             <Link href="/debugAnalysisDB">
                 Debug analystDB Debug page (TESTING ONLY)
                 <br />

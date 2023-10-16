@@ -4,7 +4,7 @@ import styles from './search.module.css';
 
 // Declaration of ResultRow functional component
 // It takes result, setShowPopup, setSelectedResult, setShowRatingPopup as props
-const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, setShowPopup, setSelectedResult, setShowRatingPopup, analysisOnClickFunction }) => {
+const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, onModeratorPage, isModeratorLoggedIn, setShowPopup, setSelectedResult, setShowRatingPopup, analysisOnClickFunction }) => {
     // The component returns a table row (tr) element
     return (
         // Add a CSS class to the tr element
@@ -44,10 +44,15 @@ const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, setS
                     Rate
                 </button>
             </td>
-            {isAnalystLoggedIn && !onAnalysisPage && (
-                <td>
-                    <button onClick={() => analysisOnClickFunction(result)}>Send to Analysis</button>
-                </td>
+            {isModeratorLoggedIn && !onModeratorPage && (
+                <>
+                    <td>
+                        <button onClick={() => analysisOnClickFunction(result)}>Send to Analysis</button>
+                    </td>
+                    <td>
+                        <button onClick={() => onDeleteArticleClick(result)}>Delete Article</button>
+                    </td>
+                </>
             )}
             {isAnalystLoggedIn && onAnalysisPage && (
                 <td>
