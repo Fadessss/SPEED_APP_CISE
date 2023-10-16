@@ -7,7 +7,6 @@ import SummaryPopup from '../components/Search/SummaryPopup.js';
 import RatingPopup from '../components/Search/RatingPopup.js';
 import axios from 'axios';
 import AnalystLogin from '../components/Analyst Login/AnalystLogin';
-import data from './api/data';
 
 async function fetchResults() {
     try {
@@ -46,6 +45,7 @@ function Search() {
     const [showAnalystLogin, setShowAnalystLogin] = useState(false);
     const [analystPassword, setAnalystPassword] = useState('');
     const [isAnalystLoggedIn, setIsAnalystLoggedIn] = useState(false);
+    const [resultMessage, setResultMessage] = useState('');
 
     // Fetch topics and claims on component mount
     useEffect(() => {
@@ -144,7 +144,7 @@ function Search() {
             analysisStatus: 'Awaiting',
         };
 
-        console.log('Sending result to analysis queue:', result);
+        console.log('Sending result to analysis queue:', dataForAnalysisDB);
 
         const insertData = async () => {
             try {
