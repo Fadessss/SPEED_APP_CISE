@@ -8,6 +8,7 @@ import RatingPopup from '../components/Search/RatingPopup.js';
 import axios from 'axios';
 import AnalystLogin from '../components/Analyst Login/AnalystLogin';
 import { set } from 'mongoose';
+import AnalystNotification from '../components/Analyst Notification/AnalystNotification';
 
 async function fetchResults() {
     try {
@@ -147,14 +148,17 @@ function Analysis() {
         <div className={styles.container}>
             {/* Conditionally render the login component */}
             {!isAnalystLoggedIn ? (
-                <AnalystLogin
-                    setShowAnalystLogin={setShowAnalystLogin}
-                    analystPassword={analystPassword}
-                    setAnalystPassword={setAnalystPassword}
-                    isAnalystLoggedIn={isAnalystLoggedIn}
-                    handleAnalystLogin={handleAnalystLogin}
-                    handleAnalystLogout={handleAnalystLogout}
-                />
+                <>
+                    <AnalystLogin
+                        setShowAnalystLogin={setShowAnalystLogin}
+                        analystPassword={analystPassword}
+                        setAnalystPassword={setAnalystPassword}
+                        isAnalystLoggedIn={isAnalystLoggedIn}
+                        handleAnalystLogin={handleAnalystLogin}
+                        handleAnalystLogout={handleAnalystLogout}
+                    />
+                    <AnalystNotification />
+                </>
             ) : (
                 <>
                     {/* Header bar */}
