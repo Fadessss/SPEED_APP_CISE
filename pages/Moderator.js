@@ -187,7 +187,7 @@ function Moderator() {
         try {
             // Make a DELETE request to the server to delete the article.
             console.log(article._id)
-            const response = await axios.delete(`/api/dropArticle/${article._id}`);
+            const response = await axios.delete(`/api/dropArticle/`, { params: { articleId: article._id } });
 
     
             if (response.status === 204) {

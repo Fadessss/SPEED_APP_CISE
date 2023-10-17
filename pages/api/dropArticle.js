@@ -29,7 +29,7 @@ async function mongooseConnect() {
 }
 
 export default async (req, res) => {
-    const { articleId }  = req.params; // extract articleId from request parameters
+    const { articleId }  = req.query; // changed from req.params to req.query
 
     await connectToDatabase();
 
