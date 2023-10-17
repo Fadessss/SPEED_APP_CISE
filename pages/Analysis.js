@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './search.module.css';
 import Header from '../components/Search/Header.js';
-import ResultHeader from '../components/Search/ResultHeader.js';
-import ResultRow from '../components/Search/ResultRow.js';
+import ResultHeader from '../components/Analysis/ResultHeader.js';
+import ResultRow from '../components/Analysis/ResultRow.js';
 import SummaryPopup from '../components/Search/SummaryPopup.js';
 import RatingPopup from '../components/Search/RatingPopup.js';
 import axios from 'axios';
@@ -49,6 +49,7 @@ function Analysis() {
     const [analystPassword, setAnalystPassword] = useState('');
     const [isAnalystLoggedIn, setIsAnalystLoggedIn] = useState(false);
     const [resultMessage, setResultMessage] = useState('');
+    const [analysisSummary, setAnalysisSummary] = useState('');
 
     // Fetch topics and claims on component mount
     useEffect(() => {
@@ -161,6 +162,22 @@ function Analysis() {
         return result.analysisStatus;
     };
 
+    const submitAnalysisSummary = async (id) => {
+        try {
+            await axios.post('/api/updateAnalysisSummary', { id, analysisSummary });
+            toast.success('Analysis summary saved successfully!', {
+                position: 'top-right',
+                autoClose: 3000,
+            });
+        } catch (error) {
+            console.error('Error while saving the analysis summary:', error);
+            toast.error('Error saving the analysis summary', {
+                position: 'top-left',
+                autoClose: 3000,
+            });
+        }
+    };
+
     //Display page
     return (
         <div className={styles.container}>
@@ -199,6 +216,9 @@ function Analysis() {
                             {/* Rows (sortable by column header) */}
                             {sortResults().map((result, index) => (
                                 <ResultRow
+                                    onSubmitAnalysisSummary={submitAnalysisSummary}
+                                    analysisSummary={analysisSummary}
+                                    setAnalysisSummary={setAnalysisSummary}
                                     key={index}
                                     result={result}
                                     setShowPopup={setShowPopup}

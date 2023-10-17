@@ -66,6 +66,10 @@ const AnalysisSchema = new mongoose.Schema({
         enum: ['Awaiting', 'Completed'],
         required: false,
     },
+    analysisSummary: {
+        type: String,
+        required: false,
+    },
 });
 
 export default mongoose.models.Analysis || mongoose.model('Analysis', AnalysisSchema);
