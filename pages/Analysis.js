@@ -9,6 +9,7 @@ import axios from 'axios';
 import AnalystLogin from '../components/Analyst Login/AnalystLogin';
 import { set } from 'mongoose';
 import AnalystNotification from '../components/Analyst Notification/AnalystNotification';
+import { toast } from 'react-toastify';
 
 async function fetchResults() {
     try {
@@ -102,8 +103,25 @@ function Analysis() {
         return sortedResults;
     };
 
-    const submitRating = () => {
-        setAverageRating(4);
+    //rating submit function
+    const submitRating = async () => {
+        try {
+            await saveRating(selectedResult._id, userRating); // save the rating
+            const averageRating = await fetchAverageRating(selectedResult._id); // fetch the average rating
+
+            setAverageRating(averageRating); // Update the averageRating state
+
+            toast.success('Rating saved successfully!', {
+                position: 'top-right',
+                autoClose: 3000,
+            });
+        } catch (error) {
+            console.error('Error while saving the rating:', error);
+            toast.error('Error saving the rating', {
+                position: 'top-left',
+                autoClose: 3000,
+            });
+        }
     };
 
     // Function to handle analyst login
@@ -207,6 +225,7 @@ function Analysis() {
                         setUserRating={setUserRating}
                         submitRating={submitRating}
                         averageRating={averageRating}
+                        setAverageRating={setAverageRating}
                     />
                 </>
             )}
