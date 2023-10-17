@@ -1,10 +1,11 @@
+//ResultRow.js
 import React from 'react';
 // Import the styles for the search module
 import styles from './search.module.css';
 
 // Declaration of ResultRow functional component
 // It takes result, setShowPopup, setSelectedResult, setShowRatingPopup as props
-const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, onModeratorPage, isModeratorLoggedIn, setShowPopup, setSelectedResult, setShowRatingPopup, analysisOnClickFunction }) => {
+const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, onModeratorPage, isModeratorLoggedIn, setShowPopup, setSelectedResult, setShowRatingPopup, analysisOnClickFunction, deleteArticleOnClickFunction }) => {
     // The component returns a table row (tr) element
     return (
         // Add a CSS class to the tr element

@@ -1,3 +1,4 @@
+//moderator.js
 import React, { useState, useEffect } from 'react';
 import styles from './search.module.css';
 import Header from '../components/Search/Header.js';
@@ -181,6 +182,47 @@ function Moderator() {
         insertData();
     };
 
+    const deleteArticle = async (article) => {
+
+        try {
+            // Make a DELETE request to the server to delete the article.
+            console.log(article._id)
+            const response = await axios.delete(`/api/dropArticle/${article._id}`);
+
+    
+            if (response.status === 204) {
+                // Article successfully deleted, update the UI state to remove the deleted article.
+                setSearchResults(searchResults.filter(item => item._id !== article._id));
+    
+                console.log('Article deleted successfully!');
+                toast.success('Article deleted successfully!', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                });
+            } else if (response.status === 404) {
+                console.error('Article not found on the server.');
+                toast.error('Article not found on the server', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                });
+            } else {
+                console.error(`Error deleting the article. Status Code: ${response.status}`);
+                toast.error('Error deleting the article', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                });
+            }
+        } catch (error) {
+            console.error('Error while deleting the article:', error);
+            toast.error('Error deleting the article', {
+                position: 'top-left',
+                autoClose: 3000,
+            });
+        }
+    };
+    
+    
+
     // Display page
     return (
         <div className={styles.container}>
@@ -226,8 +268,10 @@ function Moderator() {
                                     setShowRatingPopup={setShowRatingPopup}
                                     isModeratorLoggedIn={isModeratorLoggedIn}
                                     analysisOnClickFunction={sendToAnalysisQueue}
+                                    deleteArticleOnClickFunction={deleteArticle}
                                 />
                             ))}
+
                         </tbody>
                     </table>
 
