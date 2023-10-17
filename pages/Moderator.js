@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './search.module.css';
 import Header from '../components/Search/Header.js';
-import ResultHeader from '../components/Search/ResultHeader.js';
-import ResultRow from '../components/Search/ResultRow.js';
+import ResultHeader from '../components/Moderator/ResultHeader.js';
+import ResultRow from '../components/Moderator/ResultRow';
 import SummaryPopup from '../components/Search/SummaryPopup.js';
 import RatingPopup from '../components/Search/RatingPopup.js';
 import ModeratorLogin from '../components/ModeratorLogin/ModeratorLogin.js'; // Import ModeratorLogin component
@@ -105,8 +105,25 @@ function Moderator() {
         return sortedResults;
     };
 
-    const submitRating = () => {
-        setAverageRating(4);
+     //rating submit function
+     const submitRating = async () => {
+        try {
+            await saveRating(selectedResult._id, userRating); // save the rating
+            const averageRating = await fetchAverageRating(selectedResult._id); // fetch the average rating
+
+            setAverageRating(averageRating); // Update the averageRating state
+
+            toast.success('Rating saved successfully!', {
+                position: 'top-right',
+                autoClose: 3000,
+            });
+        } catch (error) {
+            console.error('Error while saving the rating:', error);
+            toast.error('Error saving the rating', {
+                position: 'top-left',
+                autoClose: 3000,
+            });
+        }
     };
 
     // Function to handle moderator login
@@ -287,6 +304,7 @@ function Moderator() {
                         setUserRating={setUserRating}
                         submitRating={submitRating}
                         averageRating={averageRating}
+                        setAverageRating={setAverageRating}
                     />
                 </>
             )}

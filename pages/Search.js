@@ -7,6 +7,7 @@ import SummaryPopup from '../components/Search/SummaryPopup.js';
 import RatingPopup from '../components/Search/RatingPopup.js';
 import axios from 'axios';
 import AnalystLogin from '../components/Analyst Login/AnalystLogin';
+import { toast } from 'react-toastify';
 
 async function fetchResults() {
     try {
@@ -100,8 +101,27 @@ function Search() {
         return sortedResults;
     };
 
-    const submitRating = () => {
-        setAverageRating(4);
+
+
+     //rating submit function
+     const submitRating = async () => {
+        try {
+            await saveRating(selectedResult._id, userRating); // save the rating
+            const averageRating = await fetchAverageRating(selectedResult._id); // fetch the average rating
+
+            setAverageRating(averageRating); // Update the averageRating state
+
+            toast.success('Rating saved successfully!', {
+                position: 'top-right',
+                autoClose: 3000,
+            });
+        } catch (error) {
+            console.error('Error while saving the rating:', error);
+            toast.error('Error saving the rating', {
+                position: 'top-left',
+                autoClose: 3000,
+            });
+        }
     };
 
     // Function to handle analyst login
@@ -180,7 +200,7 @@ function Search() {
                 isAnalystLoggedIn={isAnalystLoggedIn}
                 sendToAnalysisQueue={sendToAnalysisQueue}
             />
-            {/* Analyst login popup */}
+            {/* Analyst login popup 
             <AnalystLogin
                 setShowAnalystLogin={setShowAnalystLogin}
                 analystPassword={analystPassword}
@@ -189,7 +209,8 @@ function Search() {
                 handleAnalystLogin={handleAnalystLogin}
                 handleAnalystLogout={handleAnalystLogout}
             />
-
+            */}
+            
             {/* Results table */}
             <table className={styles.table}>
                 <tbody>
@@ -215,14 +236,15 @@ function Search() {
 
             {/* Rating popup */}
             <RatingPopup
-                showRatingPopup={showRatingPopup}
-                selectedResult={selectedResult}
-                setShowRatingPopup={setShowRatingPopup}
-                userRating={userRating}
-                setUserRating={setUserRating}
-                submitRating={submitRating}
-                averageRating={averageRating}
-            />
+                        showRatingPopup={showRatingPopup}
+                        selectedResult={selectedResult}
+                        setShowRatingPopup={setShowRatingPopup}
+                        userRating={userRating}
+                        setUserRating={setUserRating}
+                        submitRating={submitRating}
+                        averageRating={averageRating}
+                        setAverageRating={setAverageRating}
+                    />
         </div>
     );
 }

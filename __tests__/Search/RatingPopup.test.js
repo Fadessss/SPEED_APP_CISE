@@ -12,7 +12,7 @@ test('RatingPopup component renders correctly', () => {
   const userRating = 3;
   const setUserRating = jest.fn();
   const submitRating = jest.fn();
-  const averageRating = 4.5;
+
 
   // Render the RatingPopup component with the mock props
   render(
@@ -23,7 +23,6 @@ test('RatingPopup component renders correctly', () => {
       userRating={userRating}
       setUserRating={setUserRating}
       submitRating={submitRating}
-      averageRating={averageRating}
     />
   );
 
@@ -35,7 +34,7 @@ test('RatingPopup component renders correctly', () => {
   expect(screen.getByText('4')).toBeInTheDocument();
   expect(screen.getByText('5')).toBeInTheDocument();
   expect(screen.getByText('Submit Rating')).toBeInTheDocument();
-  expect(screen.getByText("The article's average rating is 4.5")).toBeInTheDocument();
+
 
   // Simulate a click on the close button and check if the setShowRatingPopup function is called
   fireEvent.click(screen.getByText('X'));

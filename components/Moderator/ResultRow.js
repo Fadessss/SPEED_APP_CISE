@@ -1,11 +1,34 @@
 //ResultRow.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // Import the styles for the search module
 import styles from './search.module.css';
+import axios from 'axios';
+
+
 
 // Declaration of ResultRow functional component
 // It takes result, setShowPopup, setSelectedResult, setShowRatingPopup as props
 const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, onModeratorPage, isModeratorLoggedIn, setShowPopup, setSelectedResult, setShowRatingPopup, analysisOnClickFunction, deleteArticleOnClickFunction }) => {
+
+    const [isDuplicate, setIsDuplicate] = useState(null);
+
+    useEffect(() => {
+        checkDuplicates();
+     }, []);
+  
+     const checkDuplicates = async () => {
+        try {
+           const response = await axios.post('/api/checkDuplicateInAnalyses', { title: result.title, authors: result.authors, yearOfPublication: result.yearOfPublication });
+  
+           if (response.data.isDuplicate) {
+              setIsDuplicate("DUPLICATE FOUND");
+           } else {
+              setIsDuplicate(" ");
+           }
+        } catch (err) {
+           console.error('Failed to check duplicates:', err); 
+        }
+     };
     // The component returns a table row (tr) element
     return (
         // Add a CSS class to the tr element
@@ -21,7 +44,7 @@ const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, onMo
             <td className={styles.tableData}>{result.resultOfEvidence}</td>
             <td className={styles.tableData}>{result.typeOfResearch}</td>
             <td className={styles.tableData}>{result.typeOfParticipant}</td>
-
+            <td className={styles.tableData}>{isDuplicate}</td>
             {/* Create a button that, when clicked, sets the showPopup state variable to true and the selectedResult state variable to the current result */}
             <td className={styles.tableData}>
                 <button
