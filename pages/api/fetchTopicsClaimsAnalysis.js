@@ -36,4 +36,5 @@ export default async (req, res) => {
         res.json({ topics: [...topicsSet], claims: [...claimsSet] });
     } catch (err) {
         res.status(400).json({ error: err });
+    }
 };
