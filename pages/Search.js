@@ -180,7 +180,7 @@ function Search() {
                 isAnalystLoggedIn={isAnalystLoggedIn}
                 sendToAnalysisQueue={sendToAnalysisQueue}
             />
-            {/* Analyst login popup */}
+            {/* Analyst login popup 
             <AnalystLogin
                 setShowAnalystLogin={setShowAnalystLogin}
                 analystPassword={analystPassword}
@@ -189,7 +189,8 @@ function Search() {
                 handleAnalystLogin={handleAnalystLogin}
                 handleAnalystLogout={handleAnalystLogout}
             />
-
+            */}
+            
             {/* Results table */}
             <table className={styles.table}>
                 <tbody>
