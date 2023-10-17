@@ -45,6 +45,11 @@ const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, onMo
                     Rate
                 </button>
             </td>
+            {isAnalystLoggedIn && !onAnalysisPage && (
+                <td>
+                    <button onClick={() => analysisOnClickFunction(result)}>Send to Analysis</button>
+                </td>
+            )}
             {isModeratorLoggedIn && !onModeratorPage && (
                 <>
                     <td>
