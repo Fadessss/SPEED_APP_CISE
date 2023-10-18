@@ -1,31 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import styles from './search.module.css';
-import Header from '../components/Search/Header.js';
-import ResultHeader from '../components/Analysis/ResultHeader.js';
-import ResultRow from '../components/Analysis/ResultRow.js';
-import SummaryPopup from '../components/Search/SummaryPopup.js';
-import RatingPopup from '../components/Search/RatingPopup.js';
-import axios from 'axios';
-import AnalystLogin from '../components/Analyst Login/AnalystLogin';
-import { set } from 'mongoose';
-import AnalystNotification from '../components/Analyst Notification/AnalystNotification';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import styles from "../components/Analysis/search.module.css";
+import Header from "../components/Analysis/Header.js";
+import ResultHeader from "../components/Analysis/ResultHeader.js";
+import ResultRow from "../components/Analysis/ResultRow.js";
+import SummaryPopup from "../components/Search/SummaryPopup.js";
+import RatingPopup from "../components/Search/RatingPopup.js";
+import axios from "axios";
+import AnalystLogin from "../components/Analyst Login/AnalystLogin";
+import { set } from "mongoose";
+import AnalystNotification from "../components/Analyst Notification/AnalystNotification";
+import { toast } from "react-toastify";
 
 async function fetchResults() {
     try {
-        const res = await axios.post('/api/fetchResultsAnalysis', { topic: selectedTopic, claim: selectedClaim });
+        const res = await axios.post("/api/fetchResultsAnalysis", { topic: selectedTopic, claim: selectedClaim });
         setSearchResults(res.data);
     } catch (error) {
-        console.error('Error while fetching results', error);
+        console.error("Error while fetching results", error);
     }
 }
 
 async function fetchAllResults() {
     try {
-        const res = await axios.get('/api/fetchAllResultsAnalysis');
+        const res = await axios.get("/api/fetchAllResultsAnalysis");
         setSearchResults(res.data);
     } catch (error) {
-        console.error('Error while fetching all results', error);
+        console.error("Error while fetching all results", error);
     }
 }
 
@@ -42,20 +42,20 @@ function Analysis() {
     const [averageRating, setAverageRating] = useState(null);
     const [sortConfig, setSortConfig] = useState({
         key: null,
-        direction: 'ascending',
+        direction: "ascending",
     });
     const [searchResults, setSearchResults] = useState([]);
     const [showAnalystLogin, setShowAnalystLogin] = useState(false);
-    const [analystPassword, setAnalystPassword] = useState('');
+    const [analystPassword, setAnalystPassword] = useState("");
     const [isAnalystLoggedIn, setIsAnalystLoggedIn] = useState(false);
-    const [resultMessage, setResultMessage] = useState('');
-    const [analysisSummary, setAnalysisSummary] = useState('');
+    const [resultMessage, setResultMessage] = useState("");
+    const [analysisSummary, setAnalysisSummary] = useState("");
 
     // Fetch topics and claims on component mount
     useEffect(() => {
         const fetchTopicsClaims = async () => {
             try {
-                const res = await axios.get('/api/fetchTopicsClaimsAnalysis');
+                const res = await axios.get("/api/fetchTopicsClaimsAnalysis");
                 setTopics(res.data.topics);
                 setClaims(res.data.claims);
 
@@ -67,7 +67,7 @@ function Analysis() {
                     setClaim(res.data.claims[0]);
                 }
             } catch (error) {
-                console.error('Error while fetching topics and claims', error);
+                console.error("Error while fetching topics and claims", error);
             }
         };
         fetchTopicsClaims();
@@ -76,27 +76,27 @@ function Analysis() {
     //Fetch individual results based on selected topic and claim
     const fetchResults = async () => {
         try {
-            const res = await axios.post('/api/fetchResultsAnalysis', { topic: selectedTopic, claim: selectedClaim });
+            const res = await axios.post("/api/fetchResultsAnalysis", { topic: selectedTopic, claim: selectedClaim });
             setSearchResults(res.data);
         } catch (error) {
-            console.error('Error while fetching results', error);
+            console.error("Error while fetching results", error);
         }
     };
 
     //fetch all db entries
     const fetchAllResults = async () => {
         try {
-            const res = await axios.get('/api/fetchAllResultsAnalysis');
+            const res = await axios.get("/api/fetchAllResultsAnalysis");
             setSearchResults(res.data);
         } catch (error) {
-            console.error('Error while fetching all results', error);
+            console.error("Error while fetching all results", error);
         }
     };
 
     //sortable columns
     const sortResults = () => {
         let sortedResults = [...searchResults]; // direct reference to searchResults state
-        if (sortConfig.direction === 'ascending') {
+        if (sortConfig.direction === "ascending") {
             sortedResults.sort((a, b) => (a[sortConfig.key] > b[sortConfig.key] ? 1 : -1));
         } else {
             sortedResults.sort((a, b) => (a[sortConfig.key] < b[sortConfig.key] ? 1 : -1));
@@ -112,14 +112,14 @@ function Analysis() {
 
             setAverageRating(averageRating); // Update the averageRating state
 
-            toast.success('Rating saved successfully!', {
-                position: 'top-right',
+            toast.success("Rating saved successfully!", {
+                position: "top-right",
                 autoClose: 3000,
             });
         } catch (error) {
-            console.error('Error while saving the rating:', error);
-            toast.error('Error saving the rating', {
-                position: 'top-left',
+            console.error("Error while saving the rating:", error);
+            toast.error("Error saving the rating", {
+                position: "top-left",
                 autoClose: 3000,
             });
         }
@@ -128,31 +128,31 @@ function Analysis() {
     // Function to handle analyst login
     const handleAnalystLogin = () => {
         // Check if the entered password is correct
-        if (analystPassword === '1234') {
+        if (analystPassword === "1234") {
             setIsAnalystLoggedIn(true);
             setShowAnalystLogin(false);
-            setAnalystPassword('');
-            console.log('Analyst logged in');
+            setAnalystPassword("");
+            console.log("Analyst logged in");
         } else {
-            alert('Incorrect password. Please try again.');
+            alert("Incorrect password. Please try again.");
         }
     };
 
     const handleAnalystLogout = () => {
         setIsAnalystLoggedIn(false);
-        console.log('Analyst logged out');
+        console.log("Analyst logged out");
     };
 
     // function to cycle the analysis status of a result between 'Awaiting' 'In Progress' and 'Completed'
     const cycleAnalysisStatus = (result) => {
         console.log(result.analysisStatus);
 
-        if (result.analysisStatus === 'Awaiting') {
-            result.analysisStatus = 'In Progress';
-        } else if (result.analysisStatus === 'In Progress') {
-            result.analysisStatus = 'Completed';
+        if (result.analysisStatus === "Awaiting") {
+            result.analysisStatus = "In Progress";
+        } else if (result.analysisStatus === "In Progress") {
+            result.analysisStatus = "Completed";
         } else {
-            result.analysisStatus = 'Awaiting';
+            result.analysisStatus = "Awaiting";
         }
 
         console.log(result.analysisStatus);
@@ -164,15 +164,15 @@ function Analysis() {
 
     const submitAnalysisSummary = async (id) => {
         try {
-            await axios.post('/api/updateAnalysisSummary', { id, analysisSummary });
-            toast.success('Analysis summary saved successfully!', {
-                position: 'top-right',
+            await axios.post("/api/updateAnalysisSummary", { id, analysisSummary });
+            toast.success("Analysis summary saved successfully!", {
+                position: "top-right",
                 autoClose: 3000,
             });
         } catch (error) {
-            console.error('Error while saving the analysis summary:', error);
-            toast.error('Error saving the analysis summary', {
-                position: 'top-left',
+            console.error("Error while saving the analysis summary:", error);
+            toast.error("Error saving the analysis summary", {
+                position: "top-left",
                 autoClose: 3000,
             });
         }

@@ -1,32 +1,31 @@
 //moderator.js
-import React, { useState, useEffect } from 'react';
-import styles from './search.module.css';
-import Header from '../components/Search/Header.js';
-import ResultHeader from '../components/Moderator/ResultHeader.js';
-import ResultRow from '../components/Moderator/ResultRow';
-import SummaryPopup from '../components/Search/SummaryPopup.js';
-import RatingPopup from '../components/Search/RatingPopup.js';
-import ModeratorLogin from '../components/ModeratorLogin/ModeratorLogin.js'; // Import ModeratorLogin component
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import React, { useState, useEffect } from "react";
+import styles from "./search.module.css";
+import Header from "../components/Moderator/Header.js";
+import ResultHeader from "../components/Moderator/ResultHeader.js";
+import ResultRow from "../components/Moderator/ResultRow";
+import SummaryPopup from "../components/Search/SummaryPopup.js";
+import RatingPopup from "../components/Search/RatingPopup.js";
+import ModeratorLogin from "../components/ModeratorLogin/ModeratorLogin.js"; // Import ModeratorLogin component
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 async function fetchResults() {
     try {
-        const res = await axios.post('/api/fetchResults', { topic: selectedTopic, claim: selectedClaim });
+        const res = await axios.post("/api/fetchResults", { topic: selectedTopic, claim: selectedClaim });
         setSearchResults(res.data);
     } catch (error) {
-        console.error('Error while fetching results', error);
+        console.error("Error while fetching results", error);
     }
 }
 
 async function fetchAllResults() {
     try {
-        const res = await axios.get('/api/fetchAllResults');
+        const res = await axios.get("/api/fetchAllResults");
         setSearchResults(res.data);
     } catch (error) {
-        console.error('Error while fetching all results', error);
+        console.error("Error while fetching all results", error);
     }
 }
 
@@ -43,20 +42,18 @@ function Moderator() {
     const [averageRating, setAverageRating] = useState(null);
     const [sortConfig, setSortConfig] = useState({
         key: null,
-        direction: 'ascending',
+        direction: "ascending",
     });
     const [searchResults, setSearchResults] = useState([]);
     const [showModeratorLogin, setShowModeratorLogin] = useState(false);
-    const [moderatorPassword, setModeratorPassword] = useState('');
+    const [moderatorPassword, setModeratorPassword] = useState("");
     const [isModeratorLoggedIn, setIsModeratorLoggedIn] = useState(false);
-
-
 
     // Fetch topics and claims on component mount
     useEffect(() => {
         const fetchTopicsClaims = async () => {
             try {
-                const res = await axios.get('/api/fetchTopicsClaims');
+                const res = await axios.get("/api/fetchTopicsClaims");
                 setTopics(res.data.topics);
                 setClaims(res.data.claims);
 
@@ -68,7 +65,7 @@ function Moderator() {
                     setClaim(res.data.claims[0]);
                 }
             } catch (error) {
-                console.error('Error while fetching topics and claims', error);
+                console.error("Error while fetching topics and claims", error);
             }
         };
         fetchTopicsClaims();
@@ -77,27 +74,27 @@ function Moderator() {
     // Fetch individual results based on selected topic and claim
     const fetchResults = async () => {
         try {
-            const res = await axios.post('/api/fetchResults', { topic: selectedTopic, claim: selectedClaim });
+            const res = await axios.post("/api/fetchResults", { topic: selectedTopic, claim: selectedClaim });
             setSearchResults(res.data);
         } catch (error) {
-            console.error('Error while fetching results', error);
+            console.error("Error while fetching results", error);
         }
     };
 
     // Fetch all db entries
     const fetchAllResults = async () => {
         try {
-            const res = await axios.get('/api/fetchAllResults');
+            const res = await axios.get("/api/fetchAllResults");
             setSearchResults(res.data);
         } catch (error) {
-            console.error('Error while fetching all results', error);
+            console.error("Error while fetching all results", error);
         }
     };
 
     // Sortable columns
     const sortResults = () => {
         let sortedResults = [...searchResults]; // Direct reference to searchResults state
-        if (sortConfig.direction === 'ascending') {
+        if (sortConfig.direction === "ascending") {
             sortedResults.sort((a, b) => (a[sortConfig.key] > b[sortConfig.key] ? 1 : -1));
         } else {
             sortedResults.sort((a, b) => (a[sortConfig.key] < b[sortConfig.key] ? 1 : -1));
@@ -105,22 +102,22 @@ function Moderator() {
         return sortedResults;
     };
 
-     //rating submit function
-     const submitRating = async () => {
+    //rating submit function
+    const submitRating = async () => {
         try {
             await saveRating(selectedResult._id, userRating); // save the rating
             const averageRating = await fetchAverageRating(selectedResult._id); // fetch the average rating
 
             setAverageRating(averageRating); // Update the averageRating state
 
-            toast.success('Rating saved successfully!', {
-                position: 'top-right',
+            toast.success("Rating saved successfully!", {
+                position: "top-right",
                 autoClose: 3000,
             });
         } catch (error) {
-            console.error('Error while saving the rating:', error);
-            toast.error('Error saving the rating', {
-                position: 'top-left',
+            console.error("Error while saving the rating:", error);
+            toast.error("Error saving the rating", {
+                position: "top-left",
                 autoClose: 3000,
             });
         }
@@ -129,20 +126,20 @@ function Moderator() {
     // Function to handle moderator login
     const handleModeratorLogin = () => {
         // Check if the entered password is correct
-        if (moderatorPassword === '1234') {
+        if (moderatorPassword === "1234") {
             setIsModeratorLoggedIn(true);
             setShowModeratorLogin(false);
-            setModeratorPassword('');
-            console.log('Moderator logged in');
+            setModeratorPassword("");
+            console.log("Moderator logged in");
             // Call fetchAllResults when the moderator logs in
             fetchAllResults();
         } else {
-            alert('Incorrect password. Please try again.');
+            alert("Incorrect password. Please try again.");
         }
     };
     const handleModeratorLogout = () => {
         setIsModeratorLoggedIn(false);
-        console.log('Moderator logged out');
+        console.log("Moderator logged out");
     };
 
     // Function to handle sending a result to the analysis queue
@@ -164,81 +161,75 @@ function Moderator() {
             resultOfEvidence: dataFromOriginalDB.resultOfEvidence,
             typeOfResearch: dataFromOriginalDB.typeOfResearch,
             typeOfParticipant: dataFromOriginalDB.typeOfParticipant,
-            analysisStatus: 'Awaiting',
+            analysisStatus: "Awaiting",
         };
 
-        console.log('Sending article to the analysis queue:', dataForAnalysisDB);
+        console.log("Sending article to the analysis queue:", dataForAnalysisDB);
 
         const insertData = async () => {
             try {
-                const res = await axios.post('/api/insertToAnalysisDB', dataForAnalysisDB);
+                const res = await axios.post("/api/insertToAnalysisDB", dataForAnalysisDB);
 
                 if (res.status === 200) {
-                    console.log('Successfully sent article!');
+                    console.log("Successfully sent article!");
 
                     // Update the button text to 'Sent'
-                    result.analysisStatus = 'Sent';
+                    result.analysisStatus = "Sent";
 
                     // Trigger a re-render by updating the searchResults state
                     setSearchResults([...searchResults]);
 
-                    toast.success('Article submitted successfully!', {
-                        position: 'top-right',
+                    toast.success("Article submitted successfully!", {
+                        position: "top-right",
                         autoClose: 3000, // Notification will auto-close after 3 seconds
                     });
                 } else {
-                    console.log('Error sending article!');
+                    console.log("Error sending article!");
                 }
             } catch (err) {
-                console.error('An error occurred while inserting data', err);
+                console.error("An error occurred while inserting data", err);
             }
         };
-
-
 
         insertData();
     };
 
     const deleteArticle = async (article) => {
-
         try {
             // Make a DELETE request to the server to delete the article.
-            console.log(article._id)
+            console.log(article._id);
             const response = await axios.delete(`/api/dropArticle/`, { params: { articleId: article._id } });
 
-    
             if (response.status === 204) {
                 // Article successfully deleted, update the UI state to remove the deleted article.
-                setSearchResults(searchResults.filter(item => item._id !== article._id));
-    
-                console.log('Article deleted successfully!');
-                toast.success('Article deleted successfully!', {
-                    position: 'top-right',
+                setSearchResults(searchResults.filter((item) => item._id !== article._id));
+
+                console.log("Article deleted successfully!");
+                toast.success("Article deleted successfully!", {
+                    position: "top-right",
                     autoClose: 3000,
                 });
             } else if (response.status === 404) {
-                console.error('Article not found on the server.');
-                toast.error('Article not found on the server', {
-                    position: 'top-right',
+                console.error("Article not found on the server.");
+                toast.error("Article not found on the server", {
+                    position: "top-right",
                     autoClose: 3000,
                 });
             } else {
                 console.error(`Error deleting the article. Status Code: ${response.status}`);
-                toast.error('Error deleting the article', {
-                    position: 'top-right',
+                toast.error("Error deleting the article", {
+                    position: "top-right",
                     autoClose: 3000,
                 });
             }
         } catch (error) {
-            console.error('Error while deleting the article:', error);
-            toast.error('Error deleting the article', {
-                position: 'top-left',
+            console.error("Error while deleting the article:", error);
+            toast.error("Error deleting the article", {
+                position: "top-left",
                 autoClose: 3000,
             });
         }
     };
-    
-    
 
     // Display page
     return (
@@ -288,7 +279,6 @@ function Moderator() {
                                     deleteArticleOnClickFunction={deleteArticle}
                                 />
                             ))}
-
                         </tbody>
                     </table>
 

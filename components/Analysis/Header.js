@@ -7,7 +7,7 @@ const Header = ({ selectedTopic, setTopic, selectedClaim, setClaim, topics, clai
         // Use a div to wrap all elements and apply some styles from the imported CSS module.
         <div className={styles.searchBar}>
             {/* Render a heading text. */}
-            <h1>SPEED - Search Page</h1>
+            <h1>SPEED - Analysis Page</h1>
 
             {/* Render a topic selection box. */}
             <div>
