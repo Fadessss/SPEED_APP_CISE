@@ -6,7 +6,8 @@ import ResultRow from '../components/Search/ResultRow.js';
 import SummaryPopup from '../components/Search/SummaryPopup.js';
 import RatingPopup from '../components/Search/RatingPopup.js';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 async function fetchResults() {
     try {
@@ -123,69 +124,12 @@ function Search() {
         }
     };
 
-    // Function to handle analyst login
-    const handleAnalystLogin = () => {
-        // Check if the entered password is correct
-        if (analystPassword === '1234') {
-            setIsAnalystLoggedIn(true);
-            setShowAnalystLogin(false);
-            setAnalystPassword('');
-            console.log('Analyst logged in');
-        } else {
-            alert('Incorrect password. Please try again.');
-        }
-    };
 
-    const handleAnalystLogout = () => {
-        setIsAnalystLoggedIn(false);
-        console.log('Analyst logged out');
-    };
-
-    // Function to handle sending result to analysis queue
-    const sendToAnalysisQueue = (result) => {
-        let dataFromOriginalDB = result;
-        let dataForAnalysisDB;
-
-        dataForAnalysisDB = {
-            title: dataFromOriginalDB.title,
-            authors: dataFromOriginalDB.authors,
-            journalOrConferenceName: dataFromOriginalDB.journalOrConferenceName,
-            yearOfPublication: dataFromOriginalDB.yearOfPublication,
-            volume: dataFromOriginalDB.volume,
-            number: dataFromOriginalDB.number,
-            pages: dataFromOriginalDB.pages,
-            DOI: dataFromOriginalDB.DOI,
-            SEPractice: dataFromOriginalDB.SEPractice,
-            claim: dataFromOriginalDB.claim,
-            resultOfEvidence: dataFromOriginalDB.resultOfEvidence,
-            typeOfResearch: dataFromOriginalDB.typeOfResearch,
-            typeOfParticipant: dataFromOriginalDB.typeOfParticipant,
-            analysisStatus: 'Awaiting',
-        };
-
-        console.log('Sending result to analysis queue:', dataForAnalysisDB);
-
-        const insertData = async () => {
-            try {
-                const res = await axios.post('/api/insertToAnalysisDB', dataForAnalysisDB);
-
-                if (res.status === 200) {
-                    setResultMessage('Data Inserted Successfully');
-                } else {
-                    setResultMessage('Data Insertion Failed');
-                }
-            } catch (err) {
-                console.error('An error occurred while inserting data', err);
-                setResultMessage('An error occurred while inserting data');
-            }
-        };
-
-        insertData();
-    };
 
     //Display page
     return (
         <div className={styles.container}>
+            <ToastContainer autoClose={3000} />
             {/* Header bar */}
             <Header
                 selectedTopic={selectedTopic}
