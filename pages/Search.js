@@ -83,9 +83,12 @@ function Search() {
     //fetch all db entries
     const fetchAllResults = async () => {
         try {
-            const res = await axios.get("/api/fetchAllAnalysedArticles");
+            console.log('Attempting to fetch all...')
+            const res = await axios.get('/api/fetchAllAnalysedArticles');
             setSearchResults(res.data);
+            console.log(res.data)
         } catch (error) {
+            console.log('BRUH WTF 1')
             console.error('Error while fetching all results', error);
         }
     };
