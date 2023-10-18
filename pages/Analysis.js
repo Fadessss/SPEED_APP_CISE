@@ -164,7 +164,6 @@ function Analysis() {
             resultOfEvidence: dataFromOriginalDB.resultOfEvidence,
             typeOfResearch: dataFromOriginalDB.typeOfResearch,
             typeOfParticipant: dataFromOriginalDB.typeOfParticipant,
-            analysisSummary: dataFromOriginalDB.analysisSummary,
         };
 
         console.log("Sending article to the articles queue:", dataForArticlesDB);

@@ -61,10 +61,6 @@ const ArticlesSchema = new mongoose.Schema({
         enum: ['Student', 'Practitioner'], // enum used to limit to specified values
         required: false,
     },
-    analysisSummary: {
-        type: String,
-        required: false,
-    },
 });
 
 export default mongoose.models.Articles || mongoose.model('Articles', ArticlesSchema);

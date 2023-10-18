@@ -161,7 +161,7 @@ function Moderator() {
             resultOfEvidence: dataFromOriginalDB.resultOfEvidence,
             typeOfResearch: dataFromOriginalDB.typeOfResearch,
             typeOfParticipant: dataFromOriginalDB.typeOfParticipant,
-            analysisStatus: "Awaiting",
+            //analysisStatus: "Awaiting",
         };
 
         console.log("Sending article to the analysis queue:", dataForAnalysisDB);

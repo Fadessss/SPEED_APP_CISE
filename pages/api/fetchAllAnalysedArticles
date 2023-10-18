@@ -30,10 +30,7 @@ export default async (req, res) => {
     await connectToDatabase();
 
     try {
-        const results = await Articles.find(
-            {},
-            'title authors yearOfPublication journalOrConferenceName SEPractice claim resultOfEvidence typeOfResearch typeOfParticipant analysisSummary'
-        );
+        const results = await Articles.find({},"title authors yearOfPublication journalOrConferenceName SEPractice claim resultOfEvidence typeOfResearch typeOfParticipant"); 
 
         console.log('Results fetched:', results); // Log the results
 

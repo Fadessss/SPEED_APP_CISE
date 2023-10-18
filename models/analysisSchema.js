@@ -61,15 +61,11 @@ const AnalysisSchema = new mongoose.Schema({
         enum: ['Student', 'Practitioner'], // enum used to limit to specified values
         required: false,
     },
-    analysisStatus: {
-        type: String,
-        enum: ['Awaiting', 'Completed'],
-        required: false,
-    },
-    analysisSummary: {
+
+   /* analysisSummary: {
         type: String,
         required: false,
-    },
+    },*/
 });
 
 export default mongoose.models.Analysis || mongoose.model('Analysis', AnalysisSchema);

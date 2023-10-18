@@ -6,12 +6,11 @@ import ResultRow from '../components/Search/ResultRow.js';
 import SummaryPopup from '../components/Search/SummaryPopup.js';
 import RatingPopup from '../components/Search/RatingPopup.js';
 import axios from 'axios';
-import AnalystLogin from '../components/Analyst Login/AnalystLogin';
 import { toast } from 'react-toastify';
 
 async function fetchResults() {
     try {
-        const res = await axios.post('/api/fetchResults', { topic: selectedTopic, claim: selectedClaim });
+        const res = await axios.post("/api/fetchAnalysedArticles", { topic: selectedTopic, claim: selectedClaim });
         setSearchResults(res.data);
     } catch (error) {
         console.error('Error while fetching results', error);
@@ -20,7 +19,7 @@ async function fetchResults() {
 
 async function fetchAllResults() {
     try {
-        const res = await axios.get('/api/fetchAllResults');
+        const res = await axios.get("/api/fetchAllAnalysedArticles");
         setSearchResults(res.data);
     } catch (error) {
         console.error('Error while fetching all results', error);
@@ -73,7 +72,7 @@ function Search() {
     //Fetch individual results based on selected topic and claim
     const fetchResults = async () => {
         try {
-            const res = await axios.post('/api/fetchResults', { topic: selectedTopic, claim: selectedClaim });
+            const res = await axios.post('/api/fetchAnalysedArticles', { topic: selectedTopic, claim: selectedClaim });
             setSearchResults(res.data);
         } catch (error) {
             console.error('Error while fetching results', error);
@@ -83,7 +82,7 @@ function Search() {
     //fetch all db entries
     const fetchAllResults = async () => {
         try {
-            const res = await axios.get('/api/fetchAllResults');
+            const res = await axios.get("/api/fetchAllAnalysedArticles");
             setSearchResults(res.data);
         } catch (error) {
             console.error('Error while fetching all results', error);
@@ -103,8 +102,8 @@ function Search() {
 
 
 
-     //rating submit function
-     const submitRating = async () => {
+    //rating submit function
+    const submitRating = async () => {
         try {
             await saveRating(selectedResult._id, userRating); // save the rating
             const averageRating = await fetchAverageRating(selectedResult._id); // fetch the average rating
@@ -197,25 +196,13 @@ function Search() {
                 claims={claims}
                 onGo={fetchResults}
                 onAll={fetchAllResults} // Pass down fetchAllResults function
-                isAnalystLoggedIn={isAnalystLoggedIn}
-                sendToAnalysisQueue={sendToAnalysisQueue}
             />
-            {/* Analyst login popup 
-            <AnalystLogin
-                setShowAnalystLogin={setShowAnalystLogin}
-                analystPassword={analystPassword}
-                setAnalystPassword={setAnalystPassword}
-                isAnalystLoggedIn={isAnalystLoggedIn}
-                handleAnalystLogin={handleAnalystLogin}
-                handleAnalystLogout={handleAnalystLogout}
-            />
-            */}
-            
+
             {/* Results table */}
             <table className={styles.table}>
                 <tbody>
                     {/* Column headers */}
-                    <ResultHeader sortConfig={sortConfig} setSortConfig={setSortConfig} isAnalystLoggedIn={isAnalystLoggedIn} />
+                    <ResultHeader sortConfig={sortConfig} setSortConfig={setSortConfig} />
                     {/* Rows (sortable by column header) */}
                     {sortResults().map((result, index) => (
                         <ResultRow
@@ -224,8 +211,6 @@ function Search() {
                             setShowPopup={setShowPopup}
                             setSelectedResult={setSelectedResult}
                             setShowRatingPopup={setShowRatingPopup}
-                            isAnalystLoggedIn={isAnalystLoggedIn}
-                            analysisOnClickFunction={sendToAnalysisQueue}
                         />
                     ))}
                 </tbody>
@@ -236,15 +221,15 @@ function Search() {
 
             {/* Rating popup */}
             <RatingPopup
-                        showRatingPopup={showRatingPopup}
-                        selectedResult={selectedResult}
-                        setShowRatingPopup={setShowRatingPopup}
-                        userRating={userRating}
-                        setUserRating={setUserRating}
-                        submitRating={submitRating}
-                        averageRating={averageRating}
-                        setAverageRating={setAverageRating}
-                    />
+                showRatingPopup={showRatingPopup}
+                selectedResult={selectedResult}
+                setShowRatingPopup={setShowRatingPopup}
+                userRating={userRating}
+                setUserRating={setUserRating}
+                submitRating={submitRating}
+                averageRating={averageRating}
+                setAverageRating={setAverageRating}
+            />
         </div>
     );
 }

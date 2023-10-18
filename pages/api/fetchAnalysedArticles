@@ -37,7 +37,7 @@ export default async (req, res) => {
     try {
         const results = await Articles.find(
             { SEPractice: topic, claim: claim },
-            'title authors yearOfPublication journalOrConferenceName SEPractice claim resultOfEvidence typeOfResearch typeOfParticipant analysisStatus'
+            'title authors yearOfPublication journalOrConferenceName SEPractice claim resultOfEvidence typeOfResearch typeOfParticipant'
         );
 
         console.log('Results fetched:', results); // Log the results
