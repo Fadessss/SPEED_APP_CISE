@@ -51,34 +51,17 @@ const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, onMo
                     Rate
                 </button>
             </td>
-            {/*  
-            {isAnalystLoggedIn && !onAnalysisPage && (
-                <td>
-                    <button onClick={() => analysisOnClickFunction(result)}>Send to Analysis</button>
-                </td>
-            )}
-            */}
-            {isModeratorLoggedIn && !onModeratorPage && (
-                <>
-                    <td>
-                        <button
-                            onClick={() => analysisOnClickFunction(result)}
-                            disabled={result.analysisStatus === 'Sent'} // Disable the button when the status is 'Sent'
-                        >
-                            {result.analysisStatus === 'Sent' ? 'Sent' : 'Send'}
-                        </button>
-
-                    </td>
-                    <td>
-                        <button onClick={() => deleteArticleOnClickFunction(result)}>Delete</button>
-                    </td>
-                </>
-            )}
             {isAnalystLoggedIn && onAnalysisPage && (
                 <td>
-                    <button onClick={() => analysisOnClickFunction(result)}>Complete</button>
+                    <button
+                        onClick={() => analysisOnClickFunction(result)}
+                        disabled={result.analysisStatus === 'Sent'} // Disable the button when the status is 'Sent'
+                    >
+                        {result.analysisStatus === 'Sent' ? 'Sent' : 'Send'}
+                    </button>
                 </td>
             )}
+
         </tr>
     );
 };

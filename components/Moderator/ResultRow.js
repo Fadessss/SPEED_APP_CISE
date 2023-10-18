@@ -68,13 +68,6 @@ const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, onMo
                     Rate
                 </button>
             </td>
-            {/*  
-            {isAnalystLoggedIn && !onAnalysisPage && (
-                <td>
-                    <button onClick={() => analysisOnClickFunction(result)}>Send to Analysis</button>
-                </td>
-            )}
-            */}
             {isModeratorLoggedIn && !onModeratorPage && (
                 <>
                     <td>
@@ -90,11 +83,6 @@ const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, onMo
                         <button onClick={() => deleteArticleOnClickFunction(result)}>Delete</button>
                     </td>
                 </>
-            )}
-            {isAnalystLoggedIn && onAnalysisPage && (
-                <td>
-                    <button onClick={() => analysisOnClickFunction(result)}>Click to Analyse</button>
-                </td>
             )}
         </tr>
     );
