@@ -9,7 +9,8 @@ import axios from "axios";
 import AnalystLogin from "../components/Analyst Login/AnalystLogin";
 import { set } from "mongoose";
 import AnalystNotification from "../components/Analyst Notification/AnalystNotification";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 async function fetchResults() {
     try {
@@ -133,6 +134,7 @@ function Analysis() {
             setShowAnalystLogin(false);
             setAnalystPassword("");
             console.log("Analyst logged in");
+            fetchAllResults();
         } else {
             alert("Incorrect password. Please try again.");
         }
@@ -144,19 +146,57 @@ function Analysis() {
     };
 
     // function to cycle the analysis status of a result between 'Awaiting' 'In Progress' and 'Completed'
-    const cycleAnalysisStatus = (result) => {
-        console.log(result.analysisStatus);
+    const sendToArticlesQueue = (result) => {
+        let dataFromOriginalDB = result;
+        let dataForArticlesDB;
 
-        if (result.analysisStatus === "Awaiting") {
-            result.analysisStatus = "In Progress";
-        } else if (result.analysisStatus === "In Progress") {
-            result.analysisStatus = "Completed";
-        } else {
-            result.analysisStatus = "Awaiting";
-        }
+        dataForArticlesDB = {
+            title: dataFromOriginalDB.title,
+            authors: dataFromOriginalDB.authors,
+            journalOrConferenceName: dataFromOriginalDB.journalOrConferenceName,
+            yearOfPublication: dataFromOriginalDB.yearOfPublication,
+            volume: dataFromOriginalDB.volume,
+            number: dataFromOriginalDB.number,
+            pages: dataFromOriginalDB.pages,
+            DOI: dataFromOriginalDB.DOI,
+            SEPractice: dataFromOriginalDB.SEPractice,
+            claim: dataFromOriginalDB.claim,
+            resultOfEvidence: dataFromOriginalDB.resultOfEvidence,
+            typeOfResearch: dataFromOriginalDB.typeOfResearch,
+            typeOfParticipant: dataFromOriginalDB.typeOfParticipant,
+            analysisSummary: dataFromOriginalDB.analysisSummary,
+        };
 
-        console.log(result.analysisStatus);
+        console.log("Sending article to the articles queue:", dataForArticlesDB);
+
+        const insertData = async () => {
+            try {
+                const res = await axios.post("/api/insertToArticlesDB", dataForArticlesDB);
+
+                if (res.status === 200) {
+                    console.log("Successfully sent article!");
+                    result.analysisStatus = "Sent";
+
+                    // Trigger a re-render by updating the searchResults state
+                    setSearchResults([...searchResults]);
+
+                    toast.success("Article submitted successfully!", {
+                        position: "top-right",
+                        autoClose: 3000, // Notification will auto-close after 3 seconds
+                    });
+                } else {
+                    console.log("Error sending article!");
+                }
+            } catch (err) {
+                console.error("An error occurred while inserting data", err);
+            }
+        };
+
+        insertData();
     };
+
+
+
 
     const getAnalysisStatus = (result) => {
         return result.analysisStatus;
@@ -181,6 +221,7 @@ function Analysis() {
     //Display page
     return (
         <div className={styles.container}>
+             <ToastContainer autoClose={3000} />
             {/* Conditionally render the login component */}
             {!isAnalystLoggedIn ? (
                 <>
@@ -225,7 +266,7 @@ function Analysis() {
                                     setSelectedResult={setSelectedResult}
                                     setShowRatingPopup={setShowRatingPopup}
                                     isAnalystLoggedIn={isAnalystLoggedIn}
-                                    analysisOnClickFunction={cycleAnalysisStatus}
+                                    analysisOnClickFunction={sendToArticlesQueue}
                                     getAnalysisStatus={getAnalysisStatus}
                                     onAnalysisPage={true}
                                 />
