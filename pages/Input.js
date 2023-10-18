@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import InputForm from "../components/Input/InputForm"; // Import the InputForm component
-import styles from "../components/input/inputform.module.css";
+import styles from "../components/Input/inputform.module.css";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
