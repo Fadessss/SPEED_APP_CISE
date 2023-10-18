@@ -1,12 +1,13 @@
 // Import necessary dependencies from 'react', 'axios' and 'next/link'.
-import { useState } from 'react';
-import axios from 'axios';
-import Link from 'next/link';
+import { useState } from "react";
+import axios from "axios";
+import Link from "next/link";
+import styles from "./home.module.css";
 
 // Define our Home component.
 export default function Home() {
     // Use react's useState hook to manage the state of text variable.
-    const [text, setText] = useState('');
+    const [text, setText] = useState("");
 
     // The handleSubmit function is triggered when the form is submitted. It makes a POST request to '/api/data' with `text` as payload.
     const handleSubmit = async (event) => {
@@ -14,46 +15,48 @@ export default function Home() {
         event.preventDefault();
 
         // Send a POST request to our API at the '/api/data' endpoint, and pass along our text data.
-        const res = await axios.post('/api/data', { text });
+        const res = await axios.post("/api/data", { text });
     };
 
     // Render the UI for our Home component
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className={styles.container}>
+            <form onSubmit={handleSubmit} className={styles.form}>
                 {/* A text field with a submit button to test database functionality */}
                 <label>
                     Text:
-                    <input type="text" value={text} onChange={(e) => setText(e.target.value)} />
+                    <input type="text" value={text} onChange={(e) => setText(e.target.value)} className={styles.input} />
                 </label>
-                <button type="submit">Submit</button>
+                <button type="submit" className={styles.button}>
+                    Submit
+                </button>
             </form>
             {/* Link to search page */}
-            <Link href="/Input">
+            <Link href="/Input" className={styles.link}>
                 Go to Input page
                 <br />
             </Link>
-            <Link href="/Search">
+            <Link href="/Search" className={styles.link}>
                 Go to Search page
                 <br />
             </Link>
-            <Link href="/dbDebug">
+            <Link href="/dbDebug" className={styles.link}>
                 Go to DB Debug page (TESTING ONLY)
                 <br />
             </Link>
-            <Link href="/ImportBibtex">
+            <Link href="/ImportBibtex" className={styles.link}>
                 Go to Upload page
                 <br />
             </Link>
-            <Link href="/Analysis">
+            <Link href="/Analysis" className={styles.link}>
                 Go to Analysis page
                 <br />
             </Link>
-            <Link href="/Moderator">
+            <Link href="/Moderator" className={styles.link}>
                 Go to Moderator page
                 <br />
             </Link>
-            <Link href="/debugAnalysisDB">
+            <Link href="/debugAnalysisDB" className={styles.link}>
                 Debug analystDB Debug page (TESTING ONLY)
                 <br />
             </Link>

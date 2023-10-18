@@ -1,35 +1,44 @@
-/* moderator-login.module.css */
-
 .moderatorLoginContainer {
-    align-items: center;
-    margin-top: 20px;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 20px;
 }
 
 .moderatorLoginTitle {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.moderatorLogoutTitle {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: green;
+    color: #333;
 }
 
 .moderatorLoginInput {
     padding: 8px;
-    margin-bottom: 15px;
+    margin: 8px;
 }
 
 .moderatorLoginButton {
-    background-color: blue;
+    background-color: #4caf50;
     color: white;
-    padding: 10px;
-    cursor: pointer;
+    padding: 10px 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.moderatorLoginButton:hover {
-    background-color: darkblue;
+.moderatorLogoutTitle {
+    color: #ff0000;
+}
+
+/* Styles for moderatorNotification component */
+.moderatorNotification {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+.notificationNumber {
+    font-weight: bold;
+    font-size: 20px;
+    color: #ff0000;
 }

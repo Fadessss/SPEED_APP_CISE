@@ -1,35 +1,69 @@
-/* analyst-login.module.css */
-
 .analystLoginContainer {
-    align-items: center;
-    margin-top: 20px;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 20px;
 }
 
 .analystLoginTitle {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.analystLogoutTitle {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: green;
+    color: #333;
 }
 
 .analystLoginInput {
     padding: 8px;
-    margin-bottom: 15px;
+    margin: 8px;
 }
 
 .analystLoginButton {
-    background-color: blue;
+    background-color: #4caf50;
     color: white;
-    padding: 10px;
-    cursor: pointer;
+    padding: 10px 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.analystLoginButton:hover {
-    background-color: darkblue;
+.analystLogoutTitle {
+    color: #ff0000;
+}
+
+/* Styles for AnalystNotification component */
+.analystNotification {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+.notificationNumber {
+    font-weight: bold;
+    font-size: 20px;
+    color: #ff0000;
+}
+
+/* Styles for AnalystNotification component */
+.analystNotificationContainer {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+/* Styles for the notification number */
+.notificationNumber {
+    font-weight: bold;
+    font-size: 20px;
+    color: #ff0000;
+}
+
+.searchBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: blue;
+    color: white;
+    padding: 20px;
 }

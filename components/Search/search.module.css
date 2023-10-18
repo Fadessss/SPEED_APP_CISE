@@ -1,73 +1,96 @@
-/* header bar style on search page */
-.searchBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: blue;
-  color: white;
-  padding: 20px;
+.container {
+    padding: 20px;
 }
 
-/* search page table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
 .table th {
-  text-align: left;
+    cursor: pointer;
 }
 
-.tableRow {
-  border-bottom: 1px solid black;
+.table th:hover {
+    background-color: #f5f5f5;
 }
 
-.tableData {
-  padding: 10px 0;
+.table td {
+    cursor: pointer;
 }
 
-/* search page summary popup */
+.container h1 {
+    margin-bottom: 10px;
+}
+
 .popup {
-  position: fixed;
-  width: auto;
-  /* set width to 500px */
-  height: auto;
-  /* set height to 500px */
-  top: 28%;
-  /* set top to 50% */
-  left: 65%;
-  /* set left to 50% */
-  transform: translate(-50%, -50%);
-  /* this line centers the popup */
-  padding: 20px;
-  background-color: white;
-  border: 1px solid black;
-  overflow: auto;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
 }
 
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 18px;
+.popup.active {
+    display: block;
 }
 
-/* column sort styles*/
-.columnSort {
-  cursor: pointer;
+.popup h2 {
+    margin-bottom: 10px;
 }
 
-.columnSort::before {
-  content: " ▲";
-  visibility: hidden;
+.popup input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
 }
 
-.columnSort.descending::before {
-  visibility: visible;
+.popup button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
 }
 
-.columnSort::after {
-  content: " ▼";
-  visibility: hidden;
+.popup button:hover {
+    background-color: #45a049;
 }
 
-.columnSort.ascending::after {
-  visibility: visible;
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.overlay.active {
+    display: block;
+}
+
+.searchBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(86, 0, 96);
+    color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
 }

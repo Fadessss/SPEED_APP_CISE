@@ -1,87 +1,73 @@
-/* Style for the form group container */
+/* inputform.module.css */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.input-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
 .form_group {
     margin-bottom: 20px;
-  }
-  
-  /* Style for labels */
-  .form_group_label {
+}
+
+.form_group_label {
     display: block;
-    font-size: 20px;
-    margin-bottom: 5px;
     font-weight: bold;
-    color: #333; /* Label text color */
-  }
-  
-  /* Style for input elements */
-  .form_group_input {
-    width: 50%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    outline: none; /* Remove input outline on focus */
-  }
-  
-  .form_group_select {
-    width: 50%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    outline: none;
-    margin-top: 5px; /* Add margin to separate it from other elements */
-  }
-  
-  /* Style for required indicator */
-  .form_group_required {
-    color: red; /* Color for the required indicator */
-  }
-  
-  /* Style for error messages */
-  .error_message {
+    margin-bottom: 8px;
+}
+
+.form_group_input,
+.form_group_select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+}
+
+.error_message {
     color: red;
     font-size: 14px;
-  }
-  
-  .submit_button {
+    margin-top: 4px;
+    display: block;
+}
+
+.add_author_button,
+.remove_author_button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    margin-left: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.remove_author_button {
+    background-color: #dc3545;
+}
+
+.submit_button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
     padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
     cursor: pointer;
-    font-size: 18px;
-    margin-top: 10px;
-  }
-  
-  /* Style for the submitted button */
-  .submitted_button {
-    background-color: gray; /* Change the background color to gray */
-    color: white; /* Change the text color to white or any other color you prefer */
-    cursor: not-allowed; /* Change the cursor to indicate that the button is disabled */
-  }
-  
-  /* Style for the add author button */
-  .add_author_button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 5px;
-    padding: 5px 10px;
-  }
-  
-  /* Style for the remove author button */
-  .remove_author_button {
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 5px;
-    padding: 5px 10px;
-  }
-  
+}
+
+.submit_button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* Add more styles as needed for other elements */
