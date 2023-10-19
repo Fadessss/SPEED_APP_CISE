@@ -126,17 +126,18 @@ function Analysis() {
     };
 
     // Function to handle analyst login
-    const handleAnalystLogin = () => {
-        // Check if the entered password is correct
-        if (analystPassword === "1234") {
-            setIsAnalystLoggedIn(true);
-            setShowAnalystLogin(false);
-            setAnalystPassword("");
-            console.log("Analyst logged in");
-        } else {
-            alert("Incorrect password. Please try again.");
-        }
-    };
+const handleAnalystLogin = async () => {
+    // Check if the entered password is correct
+    if (analystPassword === "1234") {
+        setIsAnalystLoggedIn(true);
+        setShowAnalystLogin(false);
+        setAnalystPassword("");
+        console.log("Analyst logged in");
+        await fetchAllResults();
+    } else {
+        alert("Incorrect password. Please try again.");
+    }
+};
 
     const handleAnalystLogout = () => {
         setIsAnalystLoggedIn(false);
@@ -198,15 +199,6 @@ function Analysis() {
                 <>
                     {/* Header bar */}
                     <Header
-                        selectedTopic={selectedTopic}
-                        setTopic={setTopic}
-                        selectedClaim={selectedClaim}
-                        setClaim={setClaim}
-                        topics={topics}
-                        claims={claims}
-                        onGo={fetchResults}
-                        onAll={fetchAllResults} // Pass down fetchAllResults function
-                        isAnalystLoggedIn={isAnalystLoggedIn}
                     />
                     {/* Results table */}
                     <table className={styles.table}>

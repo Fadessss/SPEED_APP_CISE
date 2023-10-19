@@ -46,35 +46,7 @@ const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, onMo
             <td className={styles.tableData}>{result.typeOfParticipant}</td>
             <td className={styles.tableData}>{isDuplicate}</td>
             {/* Create a button that, when clicked, sets the showPopup state variable to true and the selectedResult state variable to the current result */}
-            <td className={styles.tableData}>
-                <button
-                    onClick={() => {
-                        setShowPopup(true);
-                        setSelectedResult(result);
-                    }}
-                >
-                    Summary
-                </button>
-            </td>
 
-            {/* Create a button that, when clicked, sets the showRatingPopup state variable to true and the selectedResult state variable to the current result */}
-            <td className={styles.tableData}>
-                <button
-                    onClick={() => {
-                        setShowRatingPopup(true);
-                        setSelectedResult(result);
-                    }}
-                >
-                    Rate
-                </button>
-            </td>
-            {/*  
-            {isAnalystLoggedIn && !onAnalysisPage && (
-                <td>
-                    <button onClick={() => analysisOnClickFunction(result)}>Send to Analysis</button>
-                </td>
-            )}
-            */}
             {isModeratorLoggedIn && !onModeratorPage && (
                 <>
                     <td>
@@ -90,11 +62,6 @@ const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, onMo
                         <button onClick={() => deleteArticleOnClickFunction(result)}>Delete</button>
                     </td>
                 </>
-            )}
-            {isAnalystLoggedIn && onAnalysisPage && (
-                <td>
-                    <button onClick={() => analysisOnClickFunction(result)}>Click to Analyse</button>
-                </td>
             )}
         </tr>
     );
