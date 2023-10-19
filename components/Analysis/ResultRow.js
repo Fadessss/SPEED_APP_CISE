@@ -76,7 +76,7 @@ const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, onMo
             )}
             {isAnalystLoggedIn && onAnalysisPage && (
                 <td>
-                    <button onClick={() => analysisOnClickFunction(result)}>Click to Analyse</button>
+                    <button onClick={() => analysisOnClickFunction(result)}>Publish Article</button>
                 </td>
             )}
         </tr>
