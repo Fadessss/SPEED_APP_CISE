@@ -49,7 +49,7 @@ function Analysis() {
     const [analystPassword, setAnalystPassword] = useState("");
     const [isAnalystLoggedIn, setIsAnalystLoggedIn] = useState(false);
     const [resultMessage, setResultMessage] = useState("");
-    const [analysisSummary, setAnalysisSummary] = useState("");
+    const [analysisSummary, setAnalysisSummary] = useState({});
 
     // Fetch topics and claims on component mount
     useEffect(() => {
@@ -218,19 +218,19 @@ const handleAnalystLogin = async () => {
 
     const submitAnalysisSummary = async (id) => {
         try {
-            await axios.post("/api/updateAnalysisSummary", { id, analysisSummary });
-            toast.success("Analysis summary saved successfully!", {
-                position: "top-right",
-                autoClose: 3000,
-            });
+          await axios.post("/api/updateAnalysisSummary", { id, analysisSummary: analysisSummary[id] });
+          toast.success("Analysis summary saved successfully!", {
+            position: "top-right",
+            autoClose: 3000,
+          });
         } catch (error) {
-            console.error("Error while saving the analysis summary:", error);
-            toast.error("Error saving the analysis summary", {
-                position: "top-left",
-                autoClose: 3000,
-            });
+          console.error("Error while saving the analysis summary:", error);
+          toast.error("Error saving the analysis summary", {
+            position: "top-left",
+            autoClose: 3000,
+          });
         }
-    };
+      };
 
     //Display page
     return (

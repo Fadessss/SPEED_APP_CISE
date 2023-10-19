@@ -23,7 +23,11 @@ const ResultRow = ({ buttonText, onAnalysisPage, isAnalystLoggedIn, result, onMo
             <td className={styles.tableData}>{result.typeOfParticipant}</td>
             <td className={styles.tableData}>
                 <form onSubmit={(e) => { e.preventDefault(); onSubmitAnalysisSummary(result._id) }}>
-                    <input type="text" value={analysisSummary} onChange={(e) => setAnalysisSummary(e.target.value)} />
+                    <input
+                        type="text"
+                        value={analysisSummary[result._id] || ''}
+                        onChange={(e) => setAnalysisSummary({ ...analysisSummary, [result._id]: e.target.value })}
+                    />
                     <button type="submit">Submit Analysis Summary</button>
                 </form>
             </td>
