@@ -66,11 +66,8 @@ const ResultHeader = ({ isAnalystLoggedIn, sortConfig, setSortConfig, isModerato
             </th>
             <th>Duplicate check</th>
             {/* Non-sortable columns */}
-            <th>Summary</th>
-            <th>Rate</th>
             {isModeratorLoggedIn &&  <th>Send to Analysis</th>}
             {isModeratorLoggedIn &&  <th>Delete Article</th>}
-            {isAnalystLoggedIn && <th>Analysis</th>}
         </tr>
     );
 };

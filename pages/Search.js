@@ -49,6 +49,7 @@ function Search() {
     const [resultMessage, setResultMessage] = useState('');
 
     // Fetch topics and claims on component mount
+    // Fetch topics and claims on component mount
     useEffect(() => {
         const fetchTopicsClaims = async () => {
             try {
@@ -56,10 +57,13 @@ function Search() {
                 setTopics(res.data.topics);
                 setClaims(res.data.claims);
 
-                // Move selectedTopic and selectedClaim setState's here
+                // check if there are topics
                 if (res.data.topics.length > 0) {
-                    setTopic(res.data.topics[0]);
+                    const initialTopic = res.data.topics[0];
+                    setTopic(initialTopic);
+                    fetchClaims(initialTopic); // fetch claims for the first topic
                 }
+
                 if (res.data.claims.length > 0) {
                     setClaim(res.data.claims[0]);
                 }
@@ -73,10 +77,23 @@ function Search() {
     //Fetch individual results based on selected topic and claim
     const fetchResults = async () => {
         try {
-            const res = await axios.post('/api/fetchResults', { topic: selectedTopic, claim: selectedClaim });
+            const res = await axios.post('/api/fetchResults', {
+                topic: selectedTopic,
+                claim: selectedClaim
+            });
             setSearchResults(res.data);
         } catch (error) {
             console.error('Error while fetching results', error);
+        }
+    };
+
+    // Fetch all claims based on the selected topic
+    const fetchClaims = async (SEPractice) => {
+        try {
+            const res = await axios.get(`/api/fetchClaims?topic=${SEPractice}`);
+            setClaims(res.data);
+        } catch (error) {
+            console.error('Error while fetching claims', error);
         }
     };
 
@@ -103,8 +120,8 @@ function Search() {
 
 
 
-     //rating submit function
-     const submitRating = async () => {
+    //rating submit function
+    const submitRating = async () => {
         try {
             await saveRating(selectedResult._id, userRating); // save the rating
             const averageRating = await fetchAverageRating(selectedResult._id); // fetch the average rating
@@ -124,23 +141,6 @@ function Search() {
         }
     };
 
-    // Function to handle analyst login
-    const handleAnalystLogin = () => {
-        // Check if the entered password is correct
-        if (analystPassword === '1234') {
-            setIsAnalystLoggedIn(true);
-            setShowAnalystLogin(false);
-            setAnalystPassword('');
-            console.log('Analyst logged in');
-        } else {
-            alert('Incorrect password. Please try again.');
-        }
-    };
-
-    const handleAnalystLogout = () => {
-        setIsAnalystLoggedIn(false);
-        console.log('Analyst logged out');
-    };
 
     // Function to handle sending result to analysis queue
     const sendToAnalysisQueue = (result) => {
@@ -190,27 +190,15 @@ function Search() {
             {/* Header bar */}
             <Header
                 selectedTopic={selectedTopic}
-                setTopic={setTopic}
+                setTopic={(topic) => { setTopic(topic); fetchClaims(topic); }}
                 selectedClaim={selectedClaim}
                 setClaim={setClaim}
                 topics={topics}
                 claims={claims}
                 onGo={fetchResults}
-                onAll={fetchAllResults} // Pass down fetchAllResults function
-                isAnalystLoggedIn={isAnalystLoggedIn}
-                sendToAnalysisQueue={sendToAnalysisQueue}
+                onAll={fetchAllResults}
             />
-            {/* Analyst login popup 
-            <AnalystLogin
-                setShowAnalystLogin={setShowAnalystLogin}
-                analystPassword={analystPassword}
-                setAnalystPassword={setAnalystPassword}
-                isAnalystLoggedIn={isAnalystLoggedIn}
-                handleAnalystLogin={handleAnalystLogin}
-                handleAnalystLogout={handleAnalystLogout}
-            />
-            */}
-            
+
             {/* Results table */}
             <table className={styles.table}>
                 <tbody>
@@ -236,15 +224,15 @@ function Search() {
 
             {/* Rating popup */}
             <RatingPopup
-                        showRatingPopup={showRatingPopup}
-                        selectedResult={selectedResult}
-                        setShowRatingPopup={setShowRatingPopup}
-                        userRating={userRating}
-                        setUserRating={setUserRating}
-                        submitRating={submitRating}
-                        averageRating={averageRating}
-                        setAverageRating={setAverageRating}
-                    />
+                showRatingPopup={showRatingPopup}
+                selectedResult={selectedResult}
+                setShowRatingPopup={setShowRatingPopup}
+                userRating={userRating}
+                setUserRating={setUserRating}
+                submitRating={submitRating}
+                averageRating={averageRating}
+                setAverageRating={setAverageRating}
+            />
         </div>
     );
 }
