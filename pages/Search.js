@@ -148,7 +148,7 @@ function Search() {
             {/* Header bar */}
             <Header
                  selectedTopic={selectedTopic}
-                 setTopic={setTopic} // remove fetchClaims here
+                 setTopic={(topic) => { setTopic(topic); fetchClaims(topic); }}
                 selectedClaim={selectedClaim}
                 setClaim={setClaim}
                 topics={topics}
