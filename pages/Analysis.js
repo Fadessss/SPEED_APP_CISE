@@ -145,76 +145,23 @@ const handleAnalystLogin = async () => {
     };
 
     // function to cycle the analysis status of a result between 'Awaiting' 'In Progress' and 'Completed'
-    // const cycleAnalysisStatus = (result) => {
-    //     console.log(result.analysisStatus);
+    const cycleAnalysisStatus = (result) => {
+        console.log(result.analysisStatus);
 
-    //     if (result.analysisStatus === "Awaiting") {
-    //         result.analysisStatus = "In Progress";
-    //     } else if (result.analysisStatus === "In Progress") {
-    //         result.analysisStatus = "Completed";
-    //     } else {
-    //         result.analysisStatus = "Awaiting";
-    //     }
+        if (result.analysisStatus === "Awaiting") {
+            result.analysisStatus = "In Progress";
+        } else if (result.analysisStatus === "In Progress") {
+            result.analysisStatus = "Completed";
+        } else {
+            result.analysisStatus = "Awaiting";
+        }
 
-    //     console.log(result.analysisStatus);
-    // };
-
-    // const getAnalysisStatus = (result) => {
-    //     return result.analysisStatus;
-    // };
-
-    // Function to handle sending a result to the analysis queue
-    const publishArticle = (result) => {
-        let dataFromOriginalDB = result;
-        let dataToPublish;
-
-        dataToPublish = {
-            title: dataFromOriginalDB.title,
-            authors: dataFromOriginalDB.authors,
-            journalOrConferenceName: dataFromOriginalDB.journalOrConferenceName,
-            yearOfPublication: dataFromOriginalDB.yearOfPublication,
-            volume: dataFromOriginalDB.volume,
-            number: dataFromOriginalDB.number,
-            pages: dataFromOriginalDB.pages,
-            DOI: dataFromOriginalDB.DOI,
-            SEPractice: dataFromOriginalDB.SEPractice,
-            claim: dataFromOriginalDB.claim,
-            resultOfEvidence: dataFromOriginalDB.resultOfEvidence,
-            typeOfResearch: dataFromOriginalDB.typeOfResearch,
-            typeOfParticipant: dataFromOriginalDB.typeOfParticipant,
-            analysisStatus: "Awaiting",
-        };
-
-        console.log("Publishing article:", dataToPublish);
-
-        const insertData = async () => {
-            try {
-                const res = await axios.post("/api/insertToArticlesDB", dataToPublish);
-
-                if (res.status === 200) {
-                    console.log("Successfully sent article!");
-
-                    // Update the button text to 'Sent'
-                    result.analysisStatus = "Sent";
-
-                    // Trigger a re-render by updating the searchResults state
-                    setSearchResults([...searchResults]);
-
-                    toast.success("Article submitted successfully!", {
-                        position: "top-right",
-                        autoClose: 3000, // Notification will auto-close after 3 seconds
-                    });
-                } else {
-                    console.log("Error sending article!");
-                }
-            } catch (err) {
-                console.error("An error occurred while inserting data", err);
-            }
-        };
-
-        insertData();
+        console.log(result.analysisStatus);
     };
 
+    const getAnalysisStatus = (result) => {
+        return result.analysisStatus;
+    };
 
     const submitAnalysisSummary = async (id) => {
         try {
@@ -270,7 +217,7 @@ const handleAnalystLogin = async () => {
                                     setSelectedResult={setSelectedResult}
                                     setShowRatingPopup={setShowRatingPopup}
                                     isAnalystLoggedIn={isAnalystLoggedIn}
-                                    analysisOnClickFunction={publishArticle}
+                                    analysisOnClickFunction={cycleAnalysisStatus}
                                     getAnalysisStatus={getAnalysisStatus}
                                     onAnalysisPage={true}
                                 />

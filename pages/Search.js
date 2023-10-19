@@ -6,11 +6,12 @@ import ResultRow from '../components/Search/ResultRow.js';
 import SummaryPopup from '../components/Search/SummaryPopup.js';
 import RatingPopup from '../components/Search/RatingPopup.js';
 import axios from 'axios';
+import AnalystLogin from '../components/Analyst Login/AnalystLogin';
 import { toast } from 'react-toastify';
 
 async function fetchResults() {
     try {
-        const res = await axios.post('/api/fetchResultsSearch', { topic: selectedTopic, claim: selectedClaim });
+        const res = await axios.post('/api/fetchResults', { topic: selectedTopic, claim: selectedClaim });
         setSearchResults(res.data);
     } catch (error) {
         console.error('Error while fetching results', error);
@@ -19,7 +20,7 @@ async function fetchResults() {
 
 async function fetchAllResults() {
     try {
-        const res = await axios.get('/api/fetchAllResultsSearch');
+        const res = await axios.get('/api/fetchAllResults');
         setSearchResults(res.data);
     } catch (error) {
         console.error('Error while fetching all results', error);
@@ -52,7 +53,7 @@ function Search() {
     useEffect(() => {
         const fetchTopicsClaims = async () => {
             try {
-                const res = await axios.get('/api/fetchTopicsClaimsSearch');
+                const res = await axios.get('/api/fetchTopicsClaims');
                 setTopics(res.data.topics);
                 setClaims(res.data.claims);
 
@@ -76,7 +77,7 @@ function Search() {
     //Fetch individual results based on selected topic and claim
     const fetchResults = async () => {
         try {
-            const res = await axios.post('/api/fetchResultsSearch', {
+            const res = await axios.post('/api/fetchResults', {
                 topic: selectedTopic,
                 claim: selectedClaim
             });
@@ -89,7 +90,7 @@ function Search() {
     // Fetch all claims based on the selected topic
     const fetchClaims = async (SEPractice) => {
         try {
-            const res = await axios.get(`/api/fetchClaimsSearch?topic=${SEPractice}`);
+            const res = await axios.get(`/api/fetchClaims?topic=${SEPractice}`);
             setClaims(res.data);
         } catch (error) {
             console.error('Error while fetching claims', error);
@@ -99,7 +100,7 @@ function Search() {
     //fetch all db entries
     const fetchAllResults = async () => {
         try {
-            const res = await axios.get('/api/fetchAllResultsSearch');
+            const res = await axios.get('/api/fetchAllResults');
             setSearchResults(res.data);
         } catch (error) {
             console.error('Error while fetching all results', error);
@@ -141,14 +142,55 @@ function Search() {
     };
 
 
+    // Function to handle sending result to analysis queue
+    const sendToAnalysisQueue = (result) => {
+        let dataFromOriginalDB = result;
+        let dataForAnalysisDB;
+
+        dataForAnalysisDB = {
+            title: dataFromOriginalDB.title,
+            authors: dataFromOriginalDB.authors,
+            journalOrConferenceName: dataFromOriginalDB.journalOrConferenceName,
+            yearOfPublication: dataFromOriginalDB.yearOfPublication,
+            volume: dataFromOriginalDB.volume,
+            number: dataFromOriginalDB.number,
+            pages: dataFromOriginalDB.pages,
+            DOI: dataFromOriginalDB.DOI,
+            SEPractice: dataFromOriginalDB.SEPractice,
+            claim: dataFromOriginalDB.claim,
+            resultOfEvidence: dataFromOriginalDB.resultOfEvidence,
+            typeOfResearch: dataFromOriginalDB.typeOfResearch,
+            typeOfParticipant: dataFromOriginalDB.typeOfParticipant,
+            analysisStatus: 'Awaiting',
+        };
+
+        console.log('Sending result to analysis queue:', dataForAnalysisDB);
+
+        const insertData = async () => {
+            try {
+                const res = await axios.post('/api/insertToAnalysisDB', dataForAnalysisDB);
+
+                if (res.status === 200) {
+                    setResultMessage('Data Inserted Successfully');
+                } else {
+                    setResultMessage('Data Insertion Failed');
+                }
+            } catch (err) {
+                console.error('An error occurred while inserting data', err);
+                setResultMessage('An error occurred while inserting data');
+            }
+        };
+
+        insertData();
+    };
 
     //Display page
     return (
         <div className={styles.container}>
             {/* Header bar */}
             <Header
-                 selectedTopic={selectedTopic}
-                 setTopic={setTopic} // remove fetchClaims here
+                selectedTopic={selectedTopic}
+                setTopic={(topic) => { setTopic(topic); fetchClaims(topic); }}
                 selectedClaim={selectedClaim}
                 setClaim={setClaim}
                 topics={topics}
@@ -171,6 +213,7 @@ function Search() {
                             setSelectedResult={setSelectedResult}
                             setShowRatingPopup={setShowRatingPopup}
                             isAnalystLoggedIn={isAnalystLoggedIn}
+                            analysisOnClickFunction={sendToAnalysisQueue}
                         />
                     ))}
                 </tbody>
