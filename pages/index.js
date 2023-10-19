@@ -40,10 +40,6 @@ export default function Home() {
                 Go to Search page
                 <br />
             </Link>
-            <Link href="/dbDebug" className={styles.link}>
-                Go to DB Debug page (TESTING ONLY)
-                <br />
-            </Link>
             <Link href="/ImportBibtex" className={styles.link}>
                 Go to Upload page
                 <br />
@@ -56,8 +52,16 @@ export default function Home() {
                 Go to Moderator page
                 <br />
             </Link>
+            <Link href="/dbDebug" className={styles.link}>
+                Moderator Debug page (TESTING ONLY)
+                <br />
+            </Link>
             <Link href="/debugAnalysisDB" className={styles.link}>
-                Debug analystDB Debug page (TESTING ONLY)
+                AnalystDB Debug page (TESTING ONLY)
+                <br />
+            </Link>
+            <Link href="/dbDebugArticles" className={styles.link}>
+                Articles Debug page (TESTING ONLY)
                 <br />
             </Link>
         </div>
