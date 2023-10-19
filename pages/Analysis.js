@@ -271,7 +271,7 @@ const handleAnalystLogin = async () => {
                                     setShowRatingPopup={setShowRatingPopup}
                                     isAnalystLoggedIn={isAnalystLoggedIn}
                                     analysisOnClickFunction={publishArticle}
-                                    getAnalysisStatus={getAnalysisStatus}
+                                   // getAnalysisStatus={getAnalysisStatus}
                                     onAnalysisPage={true}
                                 />
                             ))}
