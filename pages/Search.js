@@ -49,6 +49,7 @@ function Search() {
     const [resultMessage, setResultMessage] = useState('');
 
     // Fetch topics and claims on component mount
+    // Fetch topics and claims on component mount
     useEffect(() => {
         const fetchTopicsClaims = async () => {
             try {
@@ -56,10 +57,13 @@ function Search() {
                 setTopics(res.data.topics);
                 setClaims(res.data.claims);
 
-                // Move selectedTopic and selectedClaim setState's here
+                // check if there are topics
                 if (res.data.topics.length > 0) {
-                    setTopic(res.data.topics[0]);
+                    const initialTopic = res.data.topics[0];
+                    setTopic(initialTopic);
+                    fetchClaims(initialTopic); // fetch claims for the first topic
                 }
+
                 if (res.data.claims.length > 0) {
                     setClaim(res.data.claims[0]);
                 }
