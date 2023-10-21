@@ -21,16 +21,7 @@ export default function Home() {
     // Render the UI for our Home component
     return (
         <div className={styles.container}>
-            <form onSubmit={handleSubmit} className={styles.form}>
-                {/* A text field with a submit button to test database functionality */}
-                <label>
-                    Text:
-                    <input type="text" value={text} onChange={(e) => setText(e.target.value)} className={styles.input} />
-                </label>
-                <button type="submit" className={styles.button}>
-                    Submit
-                </button>
-            </form>
+            
             {/* Link to search page */}
             <Link href="/Input" className={styles.link}>
                 Go to Input page
