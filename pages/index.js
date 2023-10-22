@@ -21,16 +21,7 @@ export default function Home() {
     // Render the UI for our Home component
     return (
         <div className={styles.container}>
-            <form onSubmit={handleSubmit} className={styles.form}>
-                {/* A text field with a submit button to test database functionality */}
-                <label>
-                    Text:
-                    <input type="text" value={text} onChange={(e) => setText(e.target.value)} className={styles.input} />
-                </label>
-                <button type="submit" className={styles.button}>
-                    Submit
-                </button>
-            </form>
+            
             {/* Link to search page */}
             <Link href="/Input" className={styles.link}>
                 Go to Input page
@@ -38,10 +29,6 @@ export default function Home() {
             </Link>
             <Link href="/Search" className={styles.link}>
                 Go to Search page
-                <br />
-            </Link>
-            <Link href="/dbDebug" className={styles.link}>
-                Go to DB Debug page (TESTING ONLY)
                 <br />
             </Link>
             <Link href="/ImportBibtex" className={styles.link}>
@@ -56,8 +43,16 @@ export default function Home() {
                 Go to Moderator page
                 <br />
             </Link>
+            <Link href="/dbDebug" className={styles.link}>
+                Moderator Debug page (TESTING ONLY)
+                <br />
+            </Link>
             <Link href="/debugAnalysisDB" className={styles.link}>
-                Debug analystDB Debug page (TESTING ONLY)
+                AnalystDB Debug page (TESTING ONLY)
+                <br />
+            </Link>
+            <Link href="/dbDebugArticles" className={styles.link}>
+                Articles Debug page (TESTING ONLY)
                 <br />
             </Link>
         </div>
