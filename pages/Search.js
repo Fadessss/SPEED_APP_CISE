@@ -8,24 +8,6 @@ import RatingPopup from '../components/Search/RatingPopup.js';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-async function fetchResults() {
-    try {
-        const res = await axios.post('/api/fetchResultsSearch', { topic: selectedTopic, claim: selectedClaim });
-        setSearchResults(res.data);
-    } catch (error) {
-        console.error('Error while fetching results', error);
-    }
-}
-
-async function fetchAllResults() {
-    try {
-        const res = await axios.get('/api/fetchAllResultsSearch');
-        setSearchResults(res.data);
-    } catch (error) {
-        console.error('Error while fetching all results', error);
-    }
-}
-
 function Search() {
     //constants and states for topics (unused), claims (unused), summary, ratings and sorting
     const [topics, setTopics] = useState([]);
@@ -42,12 +24,8 @@ function Search() {
         direction: 'ascending',
     });
     const [searchResults, setSearchResults] = useState([]);
-    const [showAnalystLogin, setShowAnalystLogin] = useState(false);
-    const [analystPassword, setAnalystPassword] = useState('');
     const [isAnalystLoggedIn, setIsAnalystLoggedIn] = useState(false);
-    const [resultMessage, setResultMessage] = useState('');
 
-    // Fetch topics and claims on component mount
     // Fetch topics and claims on component mount
     useEffect(() => {
         const fetchTopicsClaims = async () => {

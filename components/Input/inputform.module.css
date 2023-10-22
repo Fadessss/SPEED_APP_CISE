@@ -1,5 +1,6 @@
 /* inputform.module.css */
 
+/* Styling for the container div */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -9,6 +10,7 @@
     padding-bottom: 20px;
 }
 
+/* Styling for the form */
 .input-form {
     max-width: 600px;
     margin: 0 auto;
@@ -16,16 +18,19 @@
     padding-right: 10%;
 }
 
+/* Styling for form groups within the form */
 .form_group {
     margin-bottom: 20px;
 }
 
+/* Styling for labels within form groups */
 .form_group_label {
     display: block;
     font-weight: bold;
     margin-bottom: 8px;
 }
 
+/* Styling for input fields and select elements */
 .form_group_input,
 .form_group_select {
     width: 100%;
@@ -34,6 +39,7 @@
     margin-bottom: 8px;
 }
 
+/* Styling for error messages */
 .error_message {
     color: red;
     font-size: 14px;
@@ -41,6 +47,7 @@
     display: block;
 }
 
+/* Styling for buttons to add or remove authors */
 .add_author_button,
 .remove_author_button {
     background-color: #007bff;
@@ -53,10 +60,12 @@
     padding-bottom: 8px;
 }
 
+/* Styling for the remove author button */
 .remove_author_button {
     background-color: #dc3545;
 }
 
+/* Styling for the submit button */
 .submit_button {
     background-color: #28a745;
     color: #fff;
@@ -65,9 +74,8 @@
     cursor: pointer;
 }
 
+/* Styling for the disabled submit button */
 .submit_button:disabled {
     background-color: #6c757d;
     cursor: not-allowed;
 }
-
-/* Add more styles as needed for other elements */

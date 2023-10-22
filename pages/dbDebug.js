@@ -4,6 +4,7 @@ import axios from 'axios';
 export default function DbDebug() {
   const [resultMessage, setResultMessage] = useState('');
 
+  //articles to populate table for debugging purposes
   const data = [
     {
       title: 'Improving Code Quality through Deep Learning Techniques',
@@ -232,6 +233,7 @@ export default function DbDebug() {
     }
   ];
 
+  //Inserts above data into collection
   const insertData = async () => {
     try {
       const res = await axios.post('/api/insertData', { data });
@@ -247,6 +249,7 @@ export default function DbDebug() {
     }
   };
 
+  //drops this database collection
   const dropCollection = async () => {
     try {
       const res = await axios.post('/api/dropCollection', { collectionName: 'sepractices' });

@@ -51,7 +51,6 @@ const Upload = () => {
                     setEntryType(firstEntry.entryType || null);
                     setCitationKey(firstEntry.citationKey || null);
                     setTitle(firstEntry.entryTags.title || null);
-                    // Add more details as needed
                 }
 
                 setMessage(parsedData);

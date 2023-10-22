@@ -11,24 +11,6 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-async function fetchResults() {
-    try {
-        const res = await axios.post("/api/fetchResults", { topic: selectedTopic, claim: selectedClaim });
-        setSearchResults(res.data);
-    } catch (error) {
-        console.error("Error while fetching results", error);
-    }
-}
-
-async function fetchAllResults() {
-    try {
-        const res = await axios.get("/api/fetchAllResults");
-        setSearchResults(res.data);
-    } catch (error) {
-        console.error("Error while fetching all results", error);
-    }
-}
-
 function Moderator() {
     // Constants and states for topics, claims, summary, ratings, and sorting
     const [topics, setTopics] = useState([]);
@@ -166,6 +148,7 @@ function Moderator() {
 
         console.log("Sending article to the analysis queue:", dataForAnalysisDB);
 
+        //Function in insert data into the analytics queue
         const insertData = async () => {
             try {
                 const res = await axios.post("/api/insertToAnalysisDB", dataForAnalysisDB);
@@ -194,6 +177,7 @@ function Moderator() {
         insertData();
     };
 
+    //Removes an article from the moderation database
     const deleteArticle = async (article) => {
         try {
             // Make a DELETE request to the server to delete the article.

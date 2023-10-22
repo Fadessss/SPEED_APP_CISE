@@ -11,14 +11,14 @@
 
 /* Style for the form */
 .uploadForm {
-    width: 300px; /* Adjust the width as needed */
+    width: 300px; 
 }
 
 /* Style for the upload container */
 .upload {
     display: flex;
     align-items: center;
-    background-color: #f0f0f0; /* Adjust the background color as needed */
+    background-color: #f0f0f0; 
     padding: 10px;
     border-radius: 5px;
 }

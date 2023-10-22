@@ -1,36 +1,43 @@
+/* Container styles */
 .container {
     padding: 20px;
 }
 
+/* Table styles */
 .table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.table th,
-.table td {
+/* Table header and cell styles */
+.table th, .table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
+/* Table header styles */
 .table th {
     cursor: pointer;
 }
 
+/* Highlight on hover for table headers */
 .table th:hover {
     background-color: #f5f5f5;
 }
 
+/* Highlight on hover for table cells */
 .table td {
     cursor: pointer;
 }
 
+/* Heading within the container */
 .container h1 {
     margin-bottom: 10px;
 }
 
+/* Popup styles */
 .popup {
     display: none;
     position: fixed;
@@ -44,20 +51,24 @@
     z-index: 1;
 }
 
+/* Display the active popup */
 .popup.active {
     display: block;
 }
 
+/* Heading within the popup */
 .popup h2 {
     margin-bottom: 10px;
 }
 
+/* Input field styles within the popup */
 .popup input {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
 }
 
+/* Button styles within the popup */
 .popup button {
     padding: 10px;
     background-color: #4caf50;
@@ -66,10 +77,12 @@
     cursor: pointer;
 }
 
+/* Highlight on button hover */
 .popup button:hover {
     background-color: #45a049;
 }
 
+/* Overlay styles */
 .overlay {
     display: none;
     position: fixed;
@@ -81,10 +94,12 @@
     z-index: 0;
 }
 
+/* Display the active overlay */
 .overlay.active {
     display: block;
 }
 
+/* Search bar styles */
 .searchBar {
     display: flex;
     justify-content: space-between;

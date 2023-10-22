@@ -4,6 +4,7 @@ import axios from 'axios';
 export default function DebugAnalysisDB() {
     const [resultMessage, setResultMessage] = useState('');
 
+    //drops database collection
     const dropCollection = async () => {
         try {
             const res = await axios.post('/api/dropCollection', { collectionName: 'analyses' });

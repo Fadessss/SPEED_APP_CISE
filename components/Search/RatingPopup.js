@@ -10,21 +10,30 @@ const RatingPopup = ({
   userRating,
   setUserRating,
 }) => {
+  // State to store the average rating of the selected article
   const [averageRating, setAverageRating] = useState(null);
 
+  // Function to submit the user's rating for the article
   const submitRating = async () => {
     try {
+      // Save the user's rating in the database
       await saveRating(selectedResult._id, userRating);
+
+      // Fetch and update the new average rating for the article
       const newAverageRating = await fetchAverageRating(selectedResult._id);
       
-      setAverageRating(newAverageRating.toFixed(2)); // Limit to 2 decimal places
-      
+      // Limit the average rating to two decimal places
+      setAverageRating(newAverageRating.toFixed(2));
+
+      // Display a success toast message
       toast.success('Rating saved successfully!', {
         position: 'top-right',
         autoClose: 3000,
       });
     } catch (error) {
       console.error('Error while saving the rating:', error);
+
+      // Display an error toast message
       toast.error('Error saving the rating', {
         position: 'top-left',
         autoClose: 3000,
@@ -32,13 +41,15 @@ const RatingPopup = ({
     }
   };
 
+  // Effect to reset the average rating when the popup is displayed
   useEffect(() => {
     if (showRatingPopup) {
-      setAverageRating(null); // Reset average rating when the popup is displayed
+      setAverageRating(null);
     }
   }, [showRatingPopup]);
 
   return (
+    // Render the rating popup if showRatingPopup is true, otherwise render nothing
     showRatingPopup ? (
       <div className={styles.popup}>
         <button className={styles.closeButton} onClick={() => setShowRatingPopup(false)}>X</button>
@@ -52,7 +63,7 @@ const RatingPopup = ({
         </select>
         <button onClick={submitRating}>Submit Rating</button>
         {averageRating !== null && (
-          <p>The article&apos;s average rating is {averageRating}</p>
+          <p>The article's average rating is {averageRating}</p>
         )}
       </div>
     ) : null

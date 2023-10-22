@@ -22,35 +22,42 @@ export default function Home() {
     return (
         <div className={styles.container}>
             
-            {/* Link to search page */}
+            {/* Link to input page */}
             <Link href="/Input" className={styles.link}>
                 Go to Input page
                 <br />
             </Link>
+             {/* Link to search page */}
             <Link href="/Search" className={styles.link}>
                 Go to Search page
                 <br />
             </Link>
+             {/* Link to upload page */}
             <Link href="/ImportBibtex" className={styles.link}>
                 Go to Upload page
                 <br />
             </Link>
+             {/* Link to analysis page */}
             <Link href="/Analysis" className={styles.link}>
                 Go to Analysis page
                 <br />
             </Link>
+             {/* Link to moderator page */}
             <Link href="/Moderator" className={styles.link}>
                 Go to Moderator page
                 <br />
             </Link>
+             {/* Link to moderator database debug page */}
             <Link href="/dbDebug" className={styles.link}>
                 Moderator Debug page (TESTING ONLY)
                 <br />
             </Link>
+            {/* Link to analysis database debug page */}
             <Link href="/debugAnalysisDB" className={styles.link}>
                 AnalystDB Debug page (TESTING ONLY)
                 <br />
             </Link>
+            {/* Link to search (articles) database debug page */}
             <Link href="/dbDebugArticles" className={styles.link}>
                 Articles Debug page (TESTING ONLY)
                 <br />

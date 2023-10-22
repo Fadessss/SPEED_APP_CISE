@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import ResultHeader from '../../components/Search/ResultHeader';
 
+// Test case: ResultHeader component renders correctly
 test('ResultHeader component renders correctly', () => {
   // Mock the sortConfig and setSortConfig function
   const mockSortConfig = { key: 'title', direction: 'ascending' };
@@ -26,6 +27,4 @@ test('ResultHeader component renders correctly', () => {
   // Simulate a click on a column header and check if the setSortConfig function is called with the expected arguments
   fireEvent.click(screen.getByText('Title'));
   expect(setSortConfig).toHaveBeenCalledWith({ key: 'title', direction: 'descending' });
-
-  // You can add similar tests for other column headers as needed
 });

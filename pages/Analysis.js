@@ -7,27 +7,8 @@ import SummaryPopup from "../components/Search/SummaryPopup.js";
 import RatingPopup from "../components/Search/RatingPopup.js";
 import axios from "axios";
 import AnalystLogin from "../components/Analyst Login/AnalystLogin";
-import { set } from "mongoose";
 import AnalystNotification from "../components/Analyst Notification/AnalystNotification";
 import { toast } from "react-toastify";
-
-async function fetchResults() {
-    try {
-        const res = await axios.post("/api/fetchResultsAnalysis", { topic: selectedTopic, claim: selectedClaim });
-        setSearchResults(res.data);
-    } catch (error) {
-        console.error("Error while fetching results", error);
-    }
-}
-
-async function fetchAllResults() {
-    try {
-        const res = await axios.get("/api/fetchAllResultsAnalysis");
-        setSearchResults(res.data);
-    } catch (error) {
-        console.error("Error while fetching all results", error);
-    }
-}
 
 function Analysis() {
     //constants and states for topics (unused), claims (unused), summary, ratings and sorting
@@ -144,25 +125,6 @@ const handleAnalystLogin = async () => {
         console.log("Analyst logged out");
     };
 
-    // function to cycle the analysis status of a result between 'Awaiting' 'In Progress' and 'Completed'
-    // const cycleAnalysisStatus = (result) => {
-    //     console.log(result.analysisStatus);
-
-    //     if (result.analysisStatus === "Awaiting") {
-    //         result.analysisStatus = "In Progress";
-    //     } else if (result.analysisStatus === "In Progress") {
-    //         result.analysisStatus = "Completed";
-    //     } else {
-    //         result.analysisStatus = "Awaiting";
-    //     }
-
-    //     console.log(result.analysisStatus);
-    // };
-
-    // const getAnalysisStatus = (result) => {
-    //     return result.analysisStatus;
-    // };
-
     // Function to handle sending a result to the analysis queue
     const publishArticle = (result) => {
         let dataFromOriginalDB = result;
@@ -215,7 +177,8 @@ const handleAnalystLogin = async () => {
         insertData();
     };
 
-
+    //submits extra information (would be information analyst gained from reading the article) 
+    //to this articles db entry
     const submitAnalysisSummary = async (id) => {
         try {
           await axios.post("/api/updateAnalysisSummary", { id, analysisSummary: analysisSummary[id] });

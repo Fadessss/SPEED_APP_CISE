@@ -60,7 +60,6 @@ const FeedbackForm = ({ displayMessage }) => {
                     <p>
                         <strong>Abstract:</strong> {parsedMessage.entryTags.abstract}
                     </p>
-                    {/* Add more fields as needed */}
                 </div>
             )}
         </div>

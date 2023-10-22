@@ -1,7 +1,9 @@
+/* Styles for the container element */
 .container {
     padding: 20px;
 }
 
+/* Styles for the table */
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -15,22 +17,27 @@
     text-align: left;
 }
 
+/* Styles for table header cells with cursor pointer for sorting */
 .table th {
     cursor: pointer;
 }
 
+/* Hover effect on table header cells */
 .table th:hover {
     background-color: #f5f5f5;
 }
 
+/* Styles for table cells with cursor pointer */
 .table td {
     cursor: pointer;
 }
 
+/* Styles for the heading element within the container */
 .container h1 {
     margin-bottom: 10px;
 }
 
+/* Styles for the popup */
 .popup {
     position: fixed;
     top: 50%;
@@ -43,20 +50,24 @@
     z-index: 1;
 }
 
+/* Active state for the popup */
 .popup.active {
     display: block;
 }
 
+/* Styles for popup heading */
 .popup h2 {
     margin-bottom: 10px;
 }
 
+/* Styles for input fields inside the popup */
 .popup input {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
 }
 
+/* Styles for buttons inside the popup */
 .popup button {
     padding: 10px;
     background-color: #4caf50;
@@ -65,10 +76,12 @@
     cursor: pointer;
 }
 
+/* Hover effect on popup buttons */
 .popup button:hover {
     background-color: #45a049;
 }
 
+/* Styles for the overlay */
 .overlay {
     display: none;
     position: fixed;
@@ -80,10 +93,12 @@
     z-index: 0;
 }
 
+/* Active state for the overlay */
 .overlay.active {
     display: block;
 }
 
+/* Styles for the search bar */
 .searchBar {
     display: flex;
     justify-content: space-between;

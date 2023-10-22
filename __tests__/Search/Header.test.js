@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Header from "../../components/Search/Header";
 
+// Test case: Header component renders correctly
 test("Header component renders correctly", () => {
     // Mock the required props
     const selectedTopic = "Sample Topic";

@@ -1,18 +1,22 @@
+/* Styles for the container, centered with padding */
 .container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
 }
 
+/* Styles for a form with margin at the bottom */
 .form {
     margin-bottom: 20px;
 }
 
+/* Styles for labels with margin at the bottom */
 .label {
     display: block;
     margin-bottom: 10px;
 }
 
+/* Styles for input fields */
 .input {
     width: 100%;
     padding: 8px;
@@ -21,6 +25,7 @@
     box-sizing: border-box;
 }
 
+/* Styles for buttons with hover effect */
 .button {
     background-color: #4caf50;
     color: #fff;
@@ -33,7 +38,7 @@
     background-color: #45a049;
 }
 
-/* Style links */
+/* Styles for links with hover effect */
 .a {
     display: block;
     margin-top: 10px;
