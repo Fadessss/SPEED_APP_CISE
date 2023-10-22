@@ -14,7 +14,7 @@ const AnalystLogin = ({ handleAnalystLogout, analystPassword, setAnalystPassword
                 </>
             ) : (
                 <>
-                    <h1 className={styles.analystLoginTitle}>Analyst Login</h1>
+                    <h1 className={styles.analystLoginTitle}>Analyst Login <h5>(password is 1234)</h5></h1>
                     <input type="password" value={analystPassword} onChange={(e) => setAnalystPassword(e.target.value)} className={styles.analystLoginInput} />
                     <button onClick={handleAnalystLogin} className={styles.analystLoginButton}>
                         Login

@@ -14,7 +14,7 @@ const ModeratorLogin = ({ handleModeratorLogout, moderatorPassword, setModerator
                 </>
             ) : (
                 <>
-                    <h1 className={styles.moderatorLoginTitle}>Moderator Login</h1>
+                    <h1 className={styles.moderatorLoginTitle}>Moderator Login <h5>(password is 1234)</h5></h1>
                     <input type="password" value={moderatorPassword} onChange={(e) => setModeratorPassword(e.target.value)} className={styles.moderatorLoginInput} />
                     <button onClick={handleModeratorLogin} className={styles.moderatorLoginButton}>
                         Login
